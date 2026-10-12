@@ -167,7 +167,7 @@ fail without outbound HTTPS. They still write their local measurements.
   title  = {Anchored Integrity and Automated Containment for Clinical Record Stores},
   author = {Rayhan, Md. Waliul Islam},
   year   = {2026},
-  note   = {Code and data: \url{https://github.com/<your-account>/<your-repo>}}
+  note   = {Code and data: \url{https://github.com/waliulrayhan/anchored-integrity}}
 }
 ```
 

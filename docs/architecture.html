@@ -3,176 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zero-Trust Healthcare Data Protection — 4-Layer Architecture</title>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <title>Architecture</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --color-paper:   #f5f5f5;   /* white-smoke */
-      --color-ink:     #2d3142;   /* jet-black */
-      --color-muted:   #4f5d75;   /* blue-slate */
-      --color-accent:  #eb6c36;   /* atomic-tangerine */
-      --font-sans:     'Geist', system-ui, sans-serif;
-      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif KR', serif;
-      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #F5F5F5;
     }
 
     body {
-      font-family: var(--font-sans);
-      background: var(--color-paper);
-      color: var(--color-ink);
-      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 3rem 2rem;
+      overflow: hidden;
     }
 
-    .frame { max-width: 1200px; width: 100%; }
-    /* The SVG holds its readable width (min-width == the viewBox width, so the
-       type ramp is never silently scaled down). This wrapper lets a narrow
-       screen scroll the diagram instead of the whole page. */
-    .diagram-container { width: 100%; overflow-x: auto; }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.66rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      color: var(--color-ink);
-      margin-bottom: 1.5rem;
-    }
-
-    svg { width: 100%; min-width: 1040px; display: block; }
-    /* Paper has no scrollbar, so the local scroller would clip instead of
-       scroll. Let the diagram scale down to the sheet: smaller but whole
-       beats sharp but cut off. Must come after the svg rule above - a media
-       query adds no specificity, so a later plain rule would win. */
-    @media print {
-      .diagram-container { overflow-x: visible; }
-      svg { min-width: 0; }
+    img {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
     }
   </style>
 </head>
 <body>
-  <div class="frame">
-    <p class="eyebrow">Architecture · Zero-Trust Healthcare Data Protection</p>
-    <h1>Four-layer defense with an automated response loop</h1>
-
-    <!-- Replace zt-healthcare with a unique slug for this diagram before export. -->
-    <div class="diagram-container">
-      <svg viewBox="0 0 1040 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="zt-healthcare-title zt-healthcare-desc">
-        <title id="zt-healthcare-title">Four-layer defense with an automated response loop</title>
-        <desc id="zt-healthcare-desc">[One sentence describing what the diagram shows]</desc>
-        <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
-          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
-          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
-
-          <!-- OPTIONAL: dot-pattern background. Uncomment the <pattern> and the second <rect> below if you want the dotted paper look. -->
-          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
-          </pattern>
-        </defs>
-
-        <rect width="100%" height="100%" fill="#f5f5f5"/>
-        <!-- <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/> -->
-
-        <!-- Draw arrows first, then nodes. Replace with your content. -->
-
-      <rect width="100%" height="100%" fill="#f5f5f5"/>
-<rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
-<rect x="44" y="104" width="732" height="444" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/><rect x="343" y="108" width="133" height="12" rx="2" fill="#f5f5f5"/><text x="410" y="117" fill="rgba(45,49,66,0.40)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">DEFENSE-IN-DEPTH STACK</text>
-<rect x="824" y="104" width="212" height="420" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/><rect x="861" y="108" width="139" height="12" rx="2" fill="#f5f5f5"/><text x="930" y="117" fill="rgba(45,49,66,0.40)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">AUTOMATED RESPONSE LOOP</text>
-<line x1="410" y1="72" x2="410" y2="144" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
-<rect x="367" y="86" width="86" height="12" rx="2" fill="#f5f5f5"/><text x="410" y="95" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ACCESS REQUEST</text>
-<line x1="410" y1="232" x2="410" y2="244" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
-<line x1="410" y1="332" x2="410" y2="344" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
-<line x1="410" y1="432" x2="410" y2="444" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
-<line x1="410" y1="532" x2="410" y2="580" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
-<rect x="373" y="550" width="75" height="12" rx="2" fill="#f5f5f5"/><text x="410" y="559" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">LEGIT ACCESS</text>
-<line x1="760" y1="176" x2="840" y2="176" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<rect x="784" y="158" width="32" height="12" rx="2" fill="#f5f5f5"/><text x="800" y="167" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DENY</text>
-<line x1="760" y1="376" x2="840" y2="376" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<rect x="782" y="358" width="37" height="12" rx="2" fill="#f5f5f5"/><text x="800" y="367" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ALERT</text>
-<line x1="760" y1="476" x2="840" y2="476" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<rect x="779" y="458" width="42" height="12" rx="2" fill="#f5f5f5"/><text x="800" y="467" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">TAMPER</text>
-<line x1="930" y1="208" x2="930" y2="344" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<line x1="930" y1="408" x2="930" y2="444" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<rect x="60" y="144" width="700" height="88" rx="6" fill="#f5f5f5"/>
-<rect x="60" y="144" width="700" height="88" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1.2"/>
-<rect x="68" y="152" width="18" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="77" y="161" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">L1</text>
-<text x="410" y="182" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Access Control</text>
-<text x="410" y="197" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">auth · role-based authorization · session</text>
-<rect x="60" y="244" width="700" height="88" rx="6" fill="#f5f5f5"/>
-<rect x="60" y="244" width="700" height="88" rx="6" fill="#f5f5f5" stroke="#7a8399" stroke-width="1"/>
-<rect x="68" y="252" width="18" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="77" y="261" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">L2</text>
-<text x="410" y="282" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Integrity</text>
-<text x="410" y="297" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">per-record SHA-256 · hash chain anchoring</text>
-<rect x="60" y="344" width="700" height="88" rx="6" fill="#f5f5f5"/>
-<rect x="60" y="344" width="700" height="88" rx="6" fill="#f5f5f5" stroke="#7a8399" stroke-width="1"/>
-<rect x="68" y="352" width="18" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="77" y="361" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">L3</text>
-<text x="410" y="382" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Detection</text>
-<text x="410" y="397" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">rule-based monitor · ML anomaly detector</text>
-<rect x="60" y="444" width="700" height="88" rx="6" fill="#f5f5f5"/>
-<rect x="60" y="444" width="700" height="88" rx="6" fill="#f5f5f5" stroke="#7a8399" stroke-width="1"/>
-<rect x="68" y="452" width="18" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="77" y="461" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">L4</text>
-<text x="410" y="482" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Response</text>
-<text x="410" y="497" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">real-time authority alert · auto-mitigation</text>
-<rect x="840" y="144" width="180" height="64" rx="6" fill="#ececec"/>
-<rect x="840" y="144" width="180" height="64" rx="6" fill="#ececec" stroke="#bfc0c0" stroke-width="1"/>
-<rect x="848" y="152" width="39" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="868" y="161" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">STEP 1</text>
-<text x="930" y="182" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Detect</text>
-<text x="930" y="197" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">anomaly · tamper · unauthorized</text>
-<rect x="840" y="344" width="180" height="64" rx="6" fill="#ececec"/>
-<rect x="840" y="344" width="180" height="64" rx="6" fill="#ececec" stroke="#bfc0c0" stroke-width="1"/>
-<rect x="848" y="352" width="39" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="868" y="361" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">STEP 2</text>
-<text x="930" y="382" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Alert</text>
-<text x="930" y="397" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">authority notified in real time</text>
-<rect x="840" y="444" width="180" height="64" rx="6" fill="#ececec"/>
-<rect x="840" y="444" width="180" height="64" rx="6" fill="#ececec" stroke="#bfc0c0" stroke-width="1"/>
-<rect x="848" y="452" width="39" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="868" y="461" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">STEP 3</text>
-<text x="930" y="482" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Auto-mitigate</text>
-<text x="930" y="497" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">lock account · quarantine record</text>
-<rect x="330" y="16" width="160" height="56" rx="6" fill="#ececec"/>
-<rect x="330" y="16" width="160" height="56" rx="6" fill="#ececec" stroke="#bfc0c0" stroke-width="1"/>
-<rect x="338" y="24" width="39" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="358" y="33" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">THREAT</text>
-<text x="410" y="54" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Outside attacker</text>
-<text x="410" y="69" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">no credentials · DB tamper</text>
-<rect x="330" y="580" width="160" height="48" rx="6" fill="#ececec"/>
-<rect x="330" y="580" width="160" height="48" rx="6" fill="#ececec" stroke="#bfc0c0" stroke-width="1"/>
-<rect x="338" y="588" width="34" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
-<text x="355" y="597" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ASSET</text>
-<text x="410" y="618" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Sensitive healthcare data</text>
-<text x="410" y="633" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">EHR · patient records</text>
-<line x1="60" y1="660" x2="980" y2="660" stroke="rgba(45,49,66,0.12)" stroke-width="1"/>
-<rect x="60" y="668" width="10" height="10" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
-<text x="76" y="677" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">FOCAL LAYER</text>
-<line x1="180" y1="673" x2="210" y2="673" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-<text x="216" y="677" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">DETECT → ALERT → AUTO-MITIGATE</text>
-<line x1="440" y1="673" x2="470" y2="673" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
-<text x="476" y="677" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">EXTERNAL / ATTACK</text>
-</svg>
-    </div>
-  </div>
+  <img src="../figures/architecture.png" alt="System architecture diagram">
 </body>
 </html>

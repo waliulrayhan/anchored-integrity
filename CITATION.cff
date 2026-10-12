@@ -9,7 +9,7 @@ authors:
 version: 1.0.0
 date-released: 2026-10-12
 license: MIT
-repository-code: "https://github.com/<your-account>/<your-repo>"
+repository-code: "https://github.com/waliulrayhan/anchored-integrity"
 keywords:
   - clinical data integrity
   - tamper-evident logging
