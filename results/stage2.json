@@ -1,0 +1,46 @@
+{
+  "E_tsa": {
+    "ai.moda": {
+      "n": 60,
+      "granted": 60,
+      "median_ms": 91.92333449936996,
+      "mean_ms": 98.43413253329345,
+      "p50": 91.8588059994363,
+      "p90": 121.43835899951227,
+      "p95": 130.87215199993807,
+      "p99": 143.00132700009272,
+      "min": 78.9494709988503,
+      "max": 143.00132700009272,
+      "token_bytes_median": 6007.0
+    },
+    "sectigo": {
+      "n": 60,
+      "granted": 60,
+      "median_ms": 2590.1059719999466,
+      "mean_ms": 2569.503116399968,
+      "p50": 2589.332673000172,
+      "p90": 3002.6145440006076,
+      "p95": 3333.4384330009925,
+      "p99": 5669.15200800031,
+      "min": 159.13893200013263,
+      "max": 5669.15200800031,
+      "token_bytes_median": 6636.0
+    }
+  },
+  "D_immudb": {
+    "n_records": 100,
+    "set_median_ms": 7.881084499786084,
+    "set_p95_ms": 9.287657001550542,
+    "get_verified_median_ms": 0.7947075000629411,
+    "get_verified_p95_ms": 0.8824849992379313,
+    "tx_id": "100",
+    "db": "clinic",
+    "tamper_rejected": false
+  },
+  "C_ood_verifier": {
+    "honest_agrees": true,
+    "tamper_detected_by_independent_verifier": true,
+    "independent_root_unaffected_by_in_domain_root_rewrite": true,
+    "separation": "separate OS process; root supplied by file the in-domain attacker did not write"
+  }
+}

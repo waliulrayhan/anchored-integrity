@@ -1,0 +1,17 @@
+# scratch output created at run time
+work/
+*.log
+*.bin
+*.tsq
+*.tsr
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# editor / os
+.DS_Store
+.idea/
+.vscode/

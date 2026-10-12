@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper and this repository."
+title: "Anchored Integrity and Automated Containment for Clinical Record Stores"
+authors:
+  - family-names: Rayhan
+    given-names: Md. Waliul Islam
+    affiliation: "Department of Computer Science & Engineering, Jagannath University, Dhaka, Bangladesh"
+    email: waliulrayhan@gmail.com
+version: 1.0.0
+date-released: 2026-10-12
+license: MIT
+repository-code: "https://github.com/<your-account>/<your-repo>"
+keywords:
+  - clinical data integrity
+  - tamper-evident logging
+  - external timestamping
+  - RFC 3161
+  - RFC 6962
+  - automated containment
+  - healthcare security
+abstract: >
+  Prototype and measurement scripts for a clinical record store whose containment response rests on
+  a Merkle root published to an external RFC 3161 time-stamping authority, with containment triggered
+  by cryptographic mismatch against the published root.

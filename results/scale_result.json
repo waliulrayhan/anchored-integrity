@@ -1,0 +1,40 @@
+{
+  "port_freed_after_s": 1,
+  "flipped_offset": 28965,
+  "val_bytes": 57931,
+  "restart_up_s": 1,
+  "tamper": {
+    "verifiedGet_detected": false,
+    "error": "",
+    "unverified_get_len": 295
+  },
+  "scale": {
+    "200_real_anchor": {
+      "records": 200,
+      "anchors": 4,
+      "loop_median_ms": 0.211364499591582,
+      "loop_p95_ms": 0.34417900133121293,
+      "wall_s": 0.7839872000004107,
+      "throughput_rec_s": 255.10620581547153,
+      "pbkdf2_100k_ms": 37.34951799924602,
+      "false_alarms": 0
+    },
+    "1000_real_anchor": {
+      "records": 1000,
+      "anchors": 20,
+      "loop_median_ms": 0.27018900073016994,
+      "loop_p95_ms": 0.4946910012222361,
+      "wall_s": 2.4952557329997944,
+      "throughput_rec_s": 400.76052597534795,
+      "pbkdf2_100k_ms": 37.34951799924602,
+      "false_alarms": 0
+    },
+    "10000_no_anchor": {
+      "records": 10000,
+      "loop_median_ms": 0.4775934994540876,
+      "loop_p95_ms": 0.8120710008370224,
+      "wall_s": 5.080682032999903,
+      "throughput_rec_s": 1968.2396841700154
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "nonce_in_query": true,
+  "fresh_rfc3161.ai.moda": {
+    "n": 20,
+    "median": 146.45906500118144,
+    "min": 97.8580310002144,
+    "max": 306.20622300193645,
+    "mean": 155.2003066504767,
+    "p95": 223.31141299946466
+  },
+  "keepalive_rfc3161.ai.moda": {
+    "n": 20,
+    "median": 52.08102049982699,
+    "min": 44.786430000385735,
+    "max": 113.86261300140177,
+    "mean": 55.3204583004117,
+    "p95": 60.28371800130117
+  },
+  "fresh_tsa.sectigo.com": {
+    "n": 20,
+    "median": 2805.3950635003275,
+    "min": 274.15209199898527,
+    "max": 3235.181633001048,
+    "mean": 2702.68879749965,
+    "p95": 3150.8909619988117
+  },
+  "keepalive_tsa.sectigo.com": {
+    "n": 20,
+    "median": 2800.6090764993132,
+    "min": 2572.6513500012516,
+    "max": 3156.9343589981145,
+    "mean": 2802.304755199657,
+    "p95": 3024.0333000001556
+  },
+  "token_bytes": 6007,
+  "certs_in_token": 0,
+  "imprint_present": true,
+  "verify_selftrust_rc": 1,
+  "verify_selftrust_msg": "Verification: FAILED\nUsing configuration from /usr/lib/ssl/openssl.cnf\nError loading file /scratch/tmp754a74qh/chain.pem\n4057C10E2D7F0000:error:80000002:system library:BIO_new_file:No such file or directory:../crypto/bio/bss_file.c:67:calling fopen(/scratch/tmp754a74qh/chain.pem, r)\n4057C10E2D7F0000:error:10000080:BIO routines:BIO_new_file:no such file:../crypto/bio/bss_file.c:75:\n4057C10E2D7F0000",
+  "verify_system_rc": 1,
+  "verify_system_msg": "Verification: FAILED\nUsing configuration from /usr/lib/ssl/openssl.cnf\nCould not open file or uri for loading extra untrusted certs from /scratch/tmp754a74qh/chain.pem\n4037C00C917F0000:error:16000069:STORE routines:ossl_store_get0_loader_int:unregistered scheme:../crypto/store/store_register.c:237:scheme=file\n4037C00C917F0000:error:80000002:system library:file_open:No such file or directory:../pro",
+  "chain_verify_rc": 1,
+  "chain_verify_msg": "Could not open file or uri for loading certs of untrusted certificates from /scratch/tmp754a74qh/chain.pem\n40A7789E627F0000:error:16000069:STORE routines:ossl_store_get0_loader_int:unregistered scheme:../crypto/store/store_register.c:237:scheme=file\n40A7789E627F0000:error:80000002:system library:file_open:No such file or directory:../providers/implementations/storemgmt/file_store.c:267:calling stat(/scratch/tmp754a74qh/chain.pem)",
+  "verify_wrongdata_rc": 1,
+  "tsa_ca_url": "https://rfc3161.ai.moda/ca.pem",
+  "fsync_container FS (/scratch)": {
+    "label": "container FS (/scratch)",
+    "median": 0.20545699953800067,
+    "p95": 0.2619039987621363,
+    "min": 0.1471840005251579,
+    "max": 8.105001001240453
+  },
+  "fs_type_scratch": "ext2/ext3",
+  "mountinfo": "/dev/vda ext4   rw,relatime,data=ordered"
+}

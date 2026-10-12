@@ -1,0 +1,2640 @@
+{
+  "tyler": [
+    {
+      "issue": "16",
+      "DOI": "10.3390/app11167499",
+      "type": "journal-article",
+      "page": "7499",
+      "title": [
+        "Trust No One? A Framework for Assisting Healthcare Organisations in Transitioning to a Zero-Trust Network Architecture"
+      ],
+      "volume": "11",
+      "author": [
+        {
+          "given": "Dan",
+          "family": "Tyler",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Technical and Applied Computing, University of Gloucestershire, Cheltenham GL50 2RH, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9380-4611",
+          "authenticated-orcid": false,
+          "given": "Thiago",
+          "family": "Viana",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Technical and Applied Computing, University of Gloucestershire, Cheltenham GL50 2RH, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Applied Sciences"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2021,
+            8,
+            16
+          ]
+        ]
+      }
+    },
+    {
+      "title": [
+        "Trust No One, Verify Everyone: An Identity-Centric Adaptive Framework for Zero Trust Architecture"
+      ],
+      "container-title": [
+        "International Journal of Innovative Research in Technology"
+      ],
+      "volume": "13",
+      "issue": "5",
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            10,
+            15
+          ]
+        ]
+      },
+      "DOI": "10.64643/ijirt.208446-459",
+      "type": "journal-article"
+    },
+    {
+      "title": [
+        "Zero Trust Security Architecture in Cloud-Native Healthcare Systems: A Systematic Taxonomy, Implementation Framework, and Governance Paradigms"
+      ],
+      "author": [
+        {
+          "given": "Karthika",
+          "family": "A",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Manonmaniam Sundaranar University"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            10,
+            6
+          ]
+        ]
+      },
+      "DOI": "10.21203/rs.3.rs-11246804/v1",
+      "type": "posted-content"
+    }
+  ],
+  "sahu": [
+    {
+      "title": [
+        "Healthcare Zero-Trust Resilience Architecture (HZTRA): A Practitioner-Led Reference Model for Securing Hospital Information Systems"
+      ],
+      "author": [
+        {
+          "family": "Sushil Kumar Sahu",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Computer Fraud and Security"
+      ],
+      "page": "1312-1316",
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            1,
+            31
+          ]
+        ]
+      },
+      "DOI": "10.52710/cfs.1095",
+      "type": "journal-article"
+    },
+    {
+      "title": [
+        "Zero-Trust Data Engineering: A Reference Architecture for Serverless, FedRAMP-High Healthcare Pipelines"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0001-4473-7042",
+          "authenticated-orcid": false,
+          "given": "Tristan",
+          "family": "McKinnon",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Tristan",
+          "family": "McKinnon",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Data Engineering Department, Axle Informatics Rockville"
+            },
+            {
+              "name": "TLMCK Consulting Eugene"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            12,
+            16
+          ]
+        ]
+      },
+      "DOI": "10.36227/techrxiv.176585477.71596714/v1",
+      "type": "posted-content"
+    },
+    {
+      "title": [
+        "Zero-Trust Data Engineering: A Reference Architecture for Serverless, FedRAMP-High Healthcare Pipelines"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0001-4473-7042",
+          "authenticated-orcid": false,
+          "given": "Tristan",
+          "family": "McKinnon",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Tristan",
+          "family": "McKinnon",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Data Engineering Department, Axle Informatics Rockville"
+            },
+            {
+              "name": "TLMCK Consulting Eugene"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            1,
+            3
+          ]
+        ]
+      },
+      "DOI": "10.36227/techrxiv.176585477.71596714/v2",
+      "type": "posted-content"
+    }
+  ],
+  "haber": [
+    {
+      "title": [
+        "How to Time-Stamp a Digital Document"
+      ],
+      "author": [
+        {
+          "given": "Stuart",
+          "family": "Haber",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "W. Scott",
+          "family": "Stornetta",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Lecture Notes in Computer Science",
+        "Advances in Cryptology-CRYPT0\u2019 90"
+      ],
+      "page": "437-455",
+      "DOI": "10.1007/3-540-38424-3_32",
+      "type": "book-chapter"
+    },
+    {
+      "issue": "2",
+      "DOI": "10.1007/bf00196791",
+      "type": "journal-article",
+      "page": "99-111",
+      "title": [
+        "How to time-stamp a digital document"
+      ],
+      "volume": "3",
+      "author": [
+        {
+          "given": "Stuart",
+          "family": "Haber",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "W. Scott",
+          "family": "Stornetta",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of Cryptology"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1991,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "title": [
+        "Photo time-stamp detection and recognition"
+      ],
+      "author": [
+        {
+          "family": "Xiangrong Chen",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "family": "Hong-Jiang Zhang",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Seventh International Conference on Document Analysis and Recognition, 2003. Proceedings."
+      ],
+      "volume": "1",
+      "page": "319-322",
+      "DOI": "10.1109/icdar.2003.1227681",
+      "type": "proceedings-article"
+    }
+  ],
+  "heliyonAudit": [
+    {
+      "issue": "16",
+      "DOI": "10.1016/j.heliyon.2024.e34407",
+      "type": "journal-article",
+      "page": "e34407",
+      "title": [
+        "Blockchain-enabled EHR access auditing: Enhancing healthcare data security"
+      ],
+      "volume": "10",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-9959-4755",
+          "authenticated-orcid": false,
+          "given": "Faheem",
+          "family": "Ullah",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8122-8052",
+          "authenticated-orcid": false,
+          "given": "Jingsha",
+          "family": "He",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4036-0724",
+          "authenticated-orcid": false,
+          "given": "Nafei",
+          "family": "Zhu",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahsan",
+          "family": "Wajahat",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5689-2464",
+          "authenticated-orcid": false,
+          "given": "Ahsan",
+          "family": "Nazir",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sirajuddin",
+          "family": "Qureshi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Muhammad Salman",
+          "family": "Pathan",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Soumyabrata",
+          "family": "Dev",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Heliyon"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            8
+          ]
+        ]
+      },
+      "article-number": "e34407"
+    },
+    {
+      "issue": "01",
+      "DOI": "10.63665/jsa.v1i1.05",
+      "type": "journal-article",
+      "page": "43-52",
+      "title": [
+        "Integrating Blockchain Technology in Healthcare: Enhancing Data Security and Protecting Patient Privacy"
+      ],
+      "volume": "1",
+      "author": [
+        {
+          "given": "Pawan",
+          "family": "Rai",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of Scientific Advances"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            1,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "title": [
+        "Blockchain-Enabled Data Security in Healthcare: Reducing Data Breaches and Enhancing Patient Trust"
+      ],
+      "author": [
+        {
+          "given": "Sameer Singh",
+          "family": "Bisht",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Manav Rachna International Institute of Research &#x0026; Studies,School of Computer Applications,Faridabad,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Bibha",
+          "family": "Bindu Mohapatra",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Manav Rachna International Institute of Research &#x0026; Studies,School of Computer Applications,Faridabad,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Arvind",
+          "family": "Kumar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Manav Rachna International Institute of Research &#x0026; Studies,School of Computer Applications,Faridabad,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "2025 International Conference on Computational Innovations and Engineering Sustainability (ICCIES)"
+      ],
+      "page": "1-5",
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            4,
+            24
+          ]
+        ]
+      },
+      "DOI": "10.1109/iccies63851.2025.11032433",
+      "type": "proceedings-article"
+    }
+  ],
+  "ijisPbac": [
+    {
+      "issue": "1",
+      "DOI": "10.1007/s10207-024-00967-0",
+      "type": "journal-article",
+      "title": [
+        "Ehr management evolution through purpose-based access control and blockchain smart contracts"
+      ],
+      "volume": "24",
+      "author": [
+        {
+          "given": "Faheem",
+          "family": "Ullah",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jingsha",
+          "family": "He",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Nafei",
+          "family": "Zhu",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahsan",
+          "family": "Wajahat",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahsan",
+          "family": "Nazir",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sirajuddin",
+          "family": "Qureshi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hasan",
+          "family": "Shahzad",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "International Journal of Information Security"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            1,
+            15
+          ]
+        ]
+      },
+      "article-number": "63"
+    },
+    {
+      "title": [
+        "Multi-Level Security in Healthcare by Integrating Lattice-Based Access Control and Blockchain- Based Smart Contracts System"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0008-3368-3545",
+          "authenticated-orcid": false,
+          "given": "T.",
+          "family": "Haritha",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "School of Computer Science Engineering and Information Systems, Vellore Institute of Technology, Vellore, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-6005-8429",
+          "authenticated-orcid": false,
+          "given": "A.",
+          "family": "Anitha",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Computer Science Engineering and Information Systems, Vellore Institute of Technology, Vellore, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "IEEE Access"
+      ],
+      "volume": "11",
+      "page": "114322-114340",
+      "published": {
+        "date-parts": [
+          [
+            2023
+          ]
+        ]
+      },
+      "DOI": "10.1109/access.2023.3324740",
+      "type": "journal-article"
+    },
+    {
+      "title": [
+        "Blockchain based Data Access Control using Smart Contracts"
+      ],
+      "author": [
+        {
+          "given": "Adya",
+          "family": "Kiran",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Samvid",
+          "family": "Dharanikota",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Annappa",
+          "family": "Basava",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "TENCON 2019 - 2019 IEEE Region 10 Conference (TENCON)"
+      ],
+      "page": "2335-2339",
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            10
+          ]
+        ]
+      },
+      "DOI": "10.1109/tencon.2019.8929451",
+      "type": "proceedings-article"
+    }
+  ],
+  "pandey": [
+    {
+      "issue": "4s",
+      "DOI": "10.53365/nrfhh.824",
+      "type": "journal-article",
+      "page": "748-761",
+      "title": [
+        "Lightweight and Scalable Blockchain-Based Integrity Verification for EHR Systems"
+      ],
+      "volume": "6",
+      "author": [
+        {
+          "family": "Richa Pandey",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Natural Resources for Human Health"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            8,
+            27
+          ]
+        ]
+      }
+    },
+    {
+      "title": [
+        "Blockchain based Quantum Resistant Signature Algorithm for Data Integrity Verification in Cloud and Internet of Everything"
+      ],
+      "author": [
+        {
+          "given": "Pranav",
+          "family": "Shrivastava",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Bashir",
+          "family": "Alam",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Mansaf",
+          "family": "Alam",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "ICST Transactions on Scalable Information Systems"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            3,
+            20
+          ]
+        ]
+      },
+      "DOI": "10.4108/eetsis.5488",
+      "type": "journal-article"
+    },
+    {
+      "title": [
+        "Secure Heart Disease Status Classification Using Machine Learning and Blockchain-Based EHR Integrity Verification"
+      ],
+      "author": [
+        {
+          "given": "Haya H.",
+          "family": "Alsharif",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sabah M.",
+          "family": "Alzahrani",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "International Journal of Advanced Computer Science and Applications"
+      ],
+      "volume": "17",
+      "issue": "7",
+      "published": {
+        "date-parts": [
+          [
+            2026
+          ]
+        ]
+      },
+      "DOI": "10.14569/ijacsa.2026.0170757",
+      "type": "journal-article"
+    }
+  ],
+  "waghmode": [
+    {
+      "issue": "1",
+      "DOI": "10.1038/s41598-025-95621-7",
+      "type": "journal-article",
+      "title": [
+        "Intrusion detection system based on machine learning using least square support vector machine"
+      ],
+      "volume": "15",
+      "author": [
+        {
+          "given": "Pratik",
+          "family": "Waghmode",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Manideep",
+          "family": "Kanumuri",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hosam",
+          "family": "El-Ocla",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Tanner",
+          "family": "Boyle",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Scientific Reports"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            4,
+            8
+          ]
+        ]
+      },
+      "article-number": "12066"
+    },
+    {
+      "title": [
+        "Least Square Support Vector Machine based Intrusion Detection System in IoT"
+      ],
+      "author": [
+        {
+          "given": "Parveen",
+          "family": "Akhther",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Sathyabama Institute of Science &#x0026; Technology,Department of Computer Science &#x0026; Engineering,Chennai,Tamilnadu,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "A.",
+          "family": "Maryposonia",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Sathyabama Institute of Science &#x0026; Technology,Department of Computer Science &#x0026; Engineering,Chennai,Tamilnadu,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "V.S",
+          "family": "Prasanth",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Sree Sakthi College of Engineering,Department of Computer Science &#x0026; Engineering,Coimbatore,Tamilnadu,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "2023 7th International Conference on Intelligent Computing and Control Systems (ICICCS)"
+      ],
+      "page": "1545-1550",
+      "published": {
+        "date-parts": [
+          [
+            2023,
+            5,
+            17
+          ]
+        ]
+      },
+      "DOI": "10.1109/iciccs56967.2023.10142805",
+      "type": "proceedings-article"
+    },
+    {
+      "title": [
+        "Enhanced Intrusion Detection System Based on Bat Algorithm-support Vector Machine"
+      ],
+      "author": [
+        {
+          "given": "Adriana-Cristina",
+          "family": "Enache",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University Politehnica of Bucharest, Romania"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Valentin",
+          "family": "Sg\u00e2rciu",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University Politehnica of Bucharest, Romania"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the 11th International Conference on Security and Cryptography"
+      ],
+      "page": "184-189",
+      "published": {
+        "date-parts": [
+          [
+            2014
+          ]
+        ]
+      },
+      "DOI": "10.5220/0005015501840189",
+      "type": "proceedings-article"
+    }
+  ],
+  "hbild": [
+    {
+      "issue": "8",
+      "DOI": "10.3390/info16080669",
+      "type": "journal-article",
+      "page": "669",
+      "title": [
+        "HBiLD-IDS: An Efficient Hybrid BiLSTM-DNN Model for Real-Time Intrusion Detection in IoMT Networks"
+      ],
+      "volume": "16",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0007-0089-877X",
+          "authenticated-orcid": false,
+          "given": "Hamed",
+          "family": "Benahmed",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "LRIT Laboratory, Department of Computer Science, Faculty of Science, University of Abou Bekr Belka\u00efd, Tlemcen 13000, Algeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0003-7899-2185",
+          "authenticated-orcid": false,
+          "given": "Mohammed",
+          "family": "M\u2019hamedi",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "LRIT Laboratory, Department of Computer Science, Faculty of Science, University of Abou Bekr Belka\u00efd, Tlemcen 13000, Algeria"
+            },
+            {
+              "name": "Ecole Sup\u00e9rieure en Sciences Appliqu\u00e9es de Tlemcen, University of Abou Bekr Belka\u00efd, BP 165 RP Bel Horizon, Tlemcen 13000, Algeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0426-1668",
+          "authenticated-orcid": false,
+          "given": "Mohammed",
+          "family": "Merzoug",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "LRIT Laboratory, Department of Computer Science, Faculty of Science, University of Abou Bekr Belka\u00efd, Tlemcen 13000, Algeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-6554-3925",
+          "authenticated-orcid": false,
+          "given": "Mourad",
+          "family": "Hadjila",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "STIC Laboratory, Department of Telecommunication, Faculty of Technology, University of Abou Bekr Belka\u00efd, Tlemcen 13000, Algeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1987-9065",
+          "authenticated-orcid": false,
+          "given": "Amina",
+          "family": "Bekkouche",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "LRIT Laboratory, Department of Computer Science, Faculty of Science, University of Abou Bekr Belka\u00efd, Tlemcen 13000, Algeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0008-0790-3022",
+          "authenticated-orcid": false,
+          "given": "Abdelhak",
+          "family": "Etchiali",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "LRIT Laboratory, Department of Computer Science, Faculty of Science, University of Abou Bekr Belka\u00efd, Tlemcen 13000, Algeria"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8272-9425",
+          "authenticated-orcid": false,
+          "given": "Sa\u00efd",
+          "family": "Mahmoudi",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Computer Science Department, University of Mons, 7000 Mons, Belgium"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Information"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            8,
+            6
+          ]
+        ]
+      }
+    },
+    {
+      "issue": "14",
+      "DOI": "10.1007/s11227-026-08855-1",
+      "type": "journal-article",
+      "title": [
+        "XBiLD-IDS: toward an explainable hybrid BiLSTM-DNN architecture for trustworthy intrusion detection in IoMT networks"
+      ],
+      "volume": "82",
+      "author": [
+        {
+          "given": "Hamed",
+          "family": "Benahmed",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mohammed",
+          "family": "Merzoug",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Zoulikha",
+          "family": "Koudad",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mohammed",
+          "family": "M\u2019hamedi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mourad",
+          "family": "Hadjila",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Amina",
+          "family": "Bekkouche",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Said",
+          "family": "Mahmoudi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "The Journal of Supercomputing"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            9,
+            8
+          ]
+        ]
+      },
+      "article-number": "703"
+    },
+    {
+      "DOI": "10.1016/j.comnet.2025.111933",
+      "type": "journal-article",
+      "page": "111933",
+      "title": [
+        "IDS\u2013GraphMamba: A Markov-enhanced graph Mamba framework for real-time intrusion detection in IoMT edge networks"
+      ],
+      "volume": "275",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-0796-3507",
+          "authenticated-orcid": false,
+          "given": "Safa",
+          "family": "Ben Atitallah",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8236-8746",
+          "authenticated-orcid": false,
+          "given": "Maha",
+          "family": "Driss",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-2133-0757",
+          "authenticated-orcid": false,
+          "given": "Wadii",
+          "family": "Boulila",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Computer Networks"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            2
+          ]
+        ]
+      },
+      "article-number": "111933"
+    }
+  ],
+  "safetymed": [
+    {
+      "issue": "17",
+      "DOI": "10.3390/electronics12173541",
+      "type": "journal-article",
+      "page": "3541",
+      "title": [
+        "SafetyMed: A Novel IoMT Intrusion Detection System Using CNN-LSTM Hybridization"
+      ],
+      "volume": "12",
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-9306-9637",
+          "authenticated-orcid": false,
+          "given": "Nuruzzaman",
+          "family": "Faruqui",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Software Engineering, Daffodil International University, Daffodil Smart City, Birulia, Dhaka 1216, Bangladesh"
+            },
+            {
+              "name": "Institute of Information Technology, Jahangirnagar University, Savar, Dhaka 1342, Bangladesh"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8065-7173",
+          "authenticated-orcid": false,
+          "given": "Mohammad Abu",
+          "family": "Yousuf",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute of Information Technology, Jahangirnagar University, Savar, Dhaka 1342, Bangladesh"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Md",
+          "family": "Whaiduzzaman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Faculty of Science, School of Information Systems, Queensland University of Technology, 2 George St., Brisbane, QLD 4000, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5251-2214",
+          "authenticated-orcid": false,
+          "given": "AKM",
+          "family": "Azad",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Mathematics and Statistics, Faculty of Science, Imam Mohammad Ibn Saud Islamic University (IMSIU), Riyadh 13318, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5507-9399",
+          "authenticated-orcid": false,
+          "given": "Salem A.",
+          "family": "Alyami",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Mathematics and Statistics, College of Science, Imam Mohammad Ibn Saud Islamic University (IMSIU), Riyadh 11564, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0540-5053",
+          "authenticated-orcid": false,
+          "given": "Pietro",
+          "family": "Li\u00f2",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science and Technology, The University of Cambridge, Cambridge CB2 1TN, UK"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-6798-6535",
+          "authenticated-orcid": false,
+          "given": "Muhammad Ashad",
+          "family": "Kabir",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Computing, Mathematics, and Engineering, Charles Sturt University, Bathurst, NSW 2795, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mohammad Ali",
+          "family": "Moni",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Artificial Intelligence & Data Science, School of Health and Rehabilitation Sciences, Faculty of Health and Behavioural Sciences, The University of Queensland, St Lucia, Brisbane, QLD 4072, Australia"
+            },
+            {
+              "name": "Artificial Intelligence and Cyber Futures Institute, Charles Stuart University, Bathurst, NSW 2795, Australia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Electronics"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2023,
+            8,
+            22
+          ]
+        ]
+      }
+    },
+    {
+      "title": [
+        "IoMT Intrusion Detection System: A CNN-LSTM Hybrid with Adaptive Learning"
+      ],
+      "author": [
+        {
+          "given": "Nivedhidha",
+          "family": "M",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Thiagarajar College of Engineering,Computer Science and Engineering,Madurai,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ramkumar M",
+          "family": "P",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Thiagarajar College of Engineering,Computer Science and Engineering,Madurai,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Dharani",
+          "family": "M",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Thiagarajar College of Engineering,Computer Science and Engineering,Madurai,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Emil Selvan G S",
+          "family": "R",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Thiagarajar College of Engineering,Computer Science and Engineering,Madurai,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "2025 11th International Conference on Communication and Signal Processing (ICCSP)"
+      ],
+      "page": "819-824",
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            6,
+            5
+          ]
+        ]
+      },
+      "DOI": "10.1109/iccsp64183.2025.11089462",
+      "type": "proceedings-article"
+    },
+    {
+      "title": [
+        "DDoS Attack Intrusion Detection System with CNN and LSTM Hybridization"
+      ],
+      "author": [
+        {
+          "given": "V",
+          "family": "Poornachander",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Government Degree College (Autonomous),Department of Computer science and Applications,Narsampet, Warangal,Telangana"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Konga Sathish",
+          "family": "Kumar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Chaitanya (Deemed to be) University,Department of Computer Science &#x0026; Engineering,Hanamkonda,Telangana"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sripelli",
+          "family": "Jagadish",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of CS & AI, SR University, Warangal, Telangana,India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "2024 2nd International Conference on Sustainable Computing and Smart Systems (ICSCSS)"
+      ],
+      "page": "1-6",
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            7,
+            10
+          ]
+        ]
+      },
+      "DOI": "10.1109/icscss60660.2024.10625330",
+      "type": "proceedings-article"
+    }
+  ],
+  "adabara": [
+    {
+      "issue": "1",
+      "DOI": "10.1038/s41598-026-55707-2",
+      "type": "journal-article",
+      "title": [
+        "Trustworthy and ethical intrusion detection for healthcare internet of medical things using reinforcement learning and governance rules"
+      ],
+      "volume": "16",
+      "author": [
+        {
+          "given": "Ibrahim",
+          "family": "Adabara",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Bashir Olaniyi",
+          "family": "Sadiq",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Aliyu Nuhu",
+          "family": "Shuaibu",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Yale Ibrahim",
+          "family": "Danjuma",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Venkateswarlu",
+          "family": "Maninti",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mutebi",
+          "family": "Joe",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Scientific Reports"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            6,
+            6
+          ]
+        ]
+      },
+      "article-number": "25847"
+    },
+    {
+      "title": [
+        "Enhancing Cybersecurity in Healthcare: Machine Learning and Deep Learning Strategies for Intrusion Detection on the Internet of Medical Things"
+      ],
+      "author": [
+        {
+          "given": "Baohan",
+          "family": "Mo",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Mathematics, Kean University, 1000 Morris Ave., Union, New Jersey, United State, --- Select a Country ---"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the 1st International Conference on Engineering Management, Information Technology and Intelligence"
+      ],
+      "page": "301-305",
+      "published": {
+        "date-parts": [
+          [
+            2024
+          ]
+        ]
+      },
+      "DOI": "10.5220/0012937100004508",
+      "type": "proceedings-article"
+    },
+    {
+      "title": [
+        "Intrusion Detection Approach for Industrial Internet of Things Traffic using Deep Recurrent Reinforcement Learning Assisted Federated Learning_supp1-3443787.pdf"
+      ],
+      "author": [
+        {
+          "given": "Amandeep",
+          "family": "Kaur",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "DOI": "10.1109/tai.2024.3443787/mm1",
+      "type": "component"
+    }
+  ],
+  "ahmad": [
+    {
+      "title": [
+        "A Zero Trust Framework with Built-in Forensics and Response Infrastructure Automation for securing IOTM"
+      ],
+      "author": [
+        {
+          "given": "Adeel",
+          "family": "Ahmad",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Alok",
+          "family": "Gusain",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Lahore Garrison University Research Journal of Computer Science and Information Technology"
+      ],
+      "volume": "10",
+      "issue": "1",
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            2,
+            23
+          ]
+        ]
+      },
+      "DOI": "10.54692/lgurjcsit.2025.10176",
+      "type": "journal-article"
+    },
+    {
+      "title": [
+        "Zero Trust Architecture: Securing America's Critical Infrastructure"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0003-3156-7560",
+          "authenticated-orcid": true,
+          "given": "Deepak",
+          "family": "Bhaskaran",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025
+          ]
+        ]
+      },
+      "DOI": "10.2139/ssrn.5145800",
+      "type": "posted-content"
+    },
+    {
+      "title": [
+        "Distributed Identity for Zero Trust and Segmented Access Control: A Novel Approach to Securing Network Infrastructure"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0003-2249-2835",
+          "authenticated-orcid": true,
+          "given": "Sina",
+          "family": "Ahmadi",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            4,
+            10
+          ]
+        ]
+      },
+      "DOI": "10.31219/osf.io/4tz7j_v1",
+      "type": "posted-content"
+    }
+  ],
+  "khandre": [
+    {
+      "title": [
+        "AI-Driven Automated Incident Response in Healthcare Cybersecurity: A Systematic Review of SOAR Frameworks, IoMT Security, and Emerging Trends"
+      ],
+      "author": [
+        {
+          "given": "Ghanakshari",
+          "family": "Khandre",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Shripad",
+          "family": "Bhide",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "International Journal of Innovative Science and Research Technology"
+      ],
+      "page": "2598",
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            6,
+            1
+          ]
+        ]
+      },
+      "DOI": "10.38124/ijisrt/26may1548",
+      "article-number": "IJISRT26MAY1548",
+      "type": "journal-article"
+    },
+    {
+      "title": [
+        "AI-Enabled Security Operations Centers (SOCs) Accelerating Incident Response"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-5482-7351",
+          "authenticated-orcid": true,
+          "given": "Aravindan",
+          "family": "Srinivasan",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Koneru Lakshmaiah Educational Foundation, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0026-1932",
+          "authenticated-orcid": true,
+          "given": "G.",
+          "family": "Dineshnath",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Koneru Lakshmaiah Educational Foundation, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "S.",
+          "family": "Iniyan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "SRM Institute of Science and Technology, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Advances in Computational Intelligence and Robotics",
+        "Governance and Automated Security in AI-Driven Cybersecurity"
+      ],
+      "page": "245-270",
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            6,
+            5
+          ]
+        ]
+      },
+      "DOI": "10.4018/979-8-3373-0990-3.ch008",
+      "type": "book-chapter"
+    },
+    {
+      "title": [
+        "Hybrid AI-Driven Threat Hunting and Automated Incident Response for Financial Security in U.S. Healthcare"
+      ],
+      "container-title": [
+        "International Journal of Computer Applications Technology and Research"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            5,
+            16
+          ]
+        ]
+      },
+      "DOI": "10.7753/ijcatr1012.1005",
+      "type": "journal-article"
+    }
+  ],
+  "crosby": [
+    {
+      "title": [
+        "regulog: Tamper-Evident Audit Logging for Regulated Environments"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0003-9054-465X",
+          "authenticated-orcid": true,
+          "given": "Ndoh",
+          "family": "Penn",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "CRAN: Contributed Packages"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            7,
+            16
+          ]
+        ]
+      },
+      "DOI": "10.32614/cran.package.regulog",
+      "type": "dataset"
+    },
+    {
+      "title": [
+        "Efficient tamper-evident logging of distributed systems via concurrent authenticated tree"
+      ],
+      "author": [
+        {
+          "given": "Fangxiao",
+          "family": "Ning",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Yu",
+          "family": "Wen",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Gang",
+          "family": "Shi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Dan",
+          "family": "Meng",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "2017 IEEE 36th International Performance Computing and Communications Conference (IPCCC)"
+      ],
+      "page": "1-9",
+      "published": {
+        "date-parts": [
+          [
+            2017,
+            12
+          ]
+        ]
+      },
+      "DOI": "10.1109/pccc.2017.8280476",
+      "type": "proceedings-article"
+    },
+    {
+      "title": [
+        "Zero Trust Security and FERPA Aligned Data Governance for Higher Education Web Systems with Identity Centric Access Control Secure APIs and Tamper Evident Audit Logging"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0009-3165-5919",
+          "authenticated-orcid": false,
+          "given": "Md Ariful",
+          "family": "Islam",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Jagannath University, Bangladesh"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            6,
+            4
+          ]
+        ]
+      },
+      "DOI": "10.21203/rs.3.rs-9915310/v1",
+      "type": "posted-content"
+    }
+  ],
+  "usenix23": [
+    {
+      "title": [
+        "Explaining accesses to electronic health records"
+      ],
+      "author": [
+        {
+          "given": "Daniel",
+          "family": "Fabbri",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University of Michigan, Ann Arbor, MI, USA"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Kristen",
+          "family": "LeFevre",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of Michigan, Ann Arbor, MI, USA"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "David A.",
+          "family": "Hanauer",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of Michigan Medical School, Ann Arbor, MI, USA"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the 2011 workshop on Data mining for medicine and healthcare"
+      ],
+      "page": "10-17",
+      "published": {
+        "date-parts": [
+          [
+            2011,
+            8,
+            21
+          ]
+        ]
+      },
+      "DOI": "10.1145/2023582.2023585",
+      "type": "proceedings-article"
+    },
+    {
+      "title": [
+        "Improving Follow-Up of Abnormal Cancer Screens Using Electronic Health Records: Trust But Verify Test Result Communication"
+      ],
+      "container-title": [
+        "Electronic Health Records"
+      ],
+      "page": "331-344",
+      "published": {
+        "date-parts": [
+          [
+            2013,
+            11,
+            25
+          ]
+        ]
+      },
+      "DOI": "10.1201/b16306-27",
+      "type": "book-chapter"
+    },
+    {
+      "title": [
+        "HEALTH IT: How Can We Expedite Knowledge Transfer And Still Manage Expectations For Electronic Health Records?"
+      ],
+      "container-title": [
+        "Forefront Group"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2007,
+            4,
+            3
+          ]
+        ]
+      },
+      "DOI": "10.1377/forefront.20070403.000172",
+      "type": "dataset"
+    }
+  ],
+  "nslkdd": [
+    {
+      "title": [
+        "A detailed analysis of the KDD CUP 99 data set"
+      ],
+      "author": [
+        {
+          "given": "Mahbod",
+          "family": "Tavallaee",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ebrahim",
+          "family": "Bagheri",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Wei",
+          "family": "Lu",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ali A.",
+          "family": "Ghorbani",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "2009 IEEE Symposium on Computational Intelligence for Security and Defense Applications"
+      ],
+      "page": "1-6",
+      "published": {
+        "date-parts": [
+          [
+            2009,
+            7
+          ]
+        ]
+      },
+      "DOI": "10.1109/cisda.2009.5356528",
+      "type": "proceedings-article"
+    },
+    {
+      "title": [
+        "Table 1: Comparison of KDD Cup 99 and NSL-KDD data sets."
+      ],
+      "DOI": "10.7717/peerjcs.2152/table-1",
+      "type": "component"
+    },
+    {
+      "issue": "2",
+      "DOI": "10.3233/ida-2010-0466",
+      "type": "journal-article",
+      "page": "251-276",
+      "title": [
+        "Exploring discrepancies in findings obtained with the KDD Cup '99 data set"
+      ],
+      "volume": "15",
+      "author": [
+        {
+          "given": "Vegard",
+          "family": "Engen",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Software Systems Research Centre, Bournemouth University, Fern Barrow, Talbot Campus, Poole, UK"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Jonathan",
+          "family": "Vincent",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Software Systems Research Centre, Bournemouth University, Fern Barrow, Talbot Campus, Poole, UK"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Keith",
+          "family": "Phalp",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Software Systems Research Centre, Bournemouth University, Fern Barrow, Talbot Campus, Poole, UK"
+            }
+          ],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Intelligent Data Analysis"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2011,
+            3,
+            11
+          ]
+        ]
+      }
+    }
+  ]
+}

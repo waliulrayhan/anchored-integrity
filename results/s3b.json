@@ -1,0 +1,65 @@
+{
+  "loop": {
+    "flows_processed": 4000,
+    "wall_s": 14.931238350000058,
+    "ms_per_flow": 3.7328095875000145,
+    "score_contained": 1508,
+    "crypto_contained": 0,
+    "alerts": 1508
+  },
+  "combined": {
+    "flows": 3002,
+    "crypto_contained": 2,
+    "score_contained": 1130,
+    "total_containments": 1132,
+    "alerts": 1132,
+    "crypto_alerts_carry_record_evidence": true
+  },
+  "gating": {
+    "0.5": {
+      "containments": 8456,
+      "fpr": 0.027597569766244466,
+      "recall": 0.6380425465596509
+    },
+    "0.9": {
+      "containments": 7001,
+      "fpr": 0.021727937390587992,
+      "recall": 0.5291046520688849
+    },
+    "0.99": {
+      "containments": 5957,
+      "fpr": 0.01143033673154155,
+      "recall": 0.4555442998519442
+    },
+    "0.999": {
+      "containments": 5598,
+      "fpr": 0.007311296467922974,
+      "recall": 0.4306865113379568
+    }
+  },
+  "apples": {
+    "population": "simulated clinical access sessions (single population, both rules scored on it)",
+    "honest_sessions_test": 1201,
+    "tamper_sessions_test": 119,
+    "score_gate_0.5": {
+      "needless_containments": 0,
+      "fpr": 0.0,
+      "tamper_caught": 119,
+      "recall": 1.0
+    },
+    "deterministic": {
+      "needless_containments": 0,
+      "fpr": 0.0,
+      "tamper_caught": 119,
+      "recall": 1.0,
+      "basis": "cryptographic mismatch (zero by construction, not by measurement)"
+    },
+    "caveat": "declared simulation using MIMIC-IV-derived base rates; the deterministic zero is true by construction"
+  },
+  "nslkdd_loop": {
+    "score_contained_0.5": 8456,
+    "attack_recall": 0.6380425465596509,
+    "fpr_on_flows": 0.027597569766244466,
+    "note": "NSL-KDD network flows; retained as classifier behaviour only, NOT the apples-to-apples comparison"
+  }
+}

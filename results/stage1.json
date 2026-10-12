@@ -1,0 +1,68 @@
+{
+  "seed": 20261011,
+  "A": {
+    "1.0": {
+      "trials": 40,
+      "detected": 40,
+      "mean_ms": 506.6505068848983,
+      "median_ms": 514.6096773896716,
+      "min_ms": 26.132337890885537,
+      "max_ms": 927.3415696752636,
+      "p95_ms": 860.3153931289853,
+      "theory_mean_ms": 500.0,
+      "theory_worst_ms": 1000.0,
+      "verify_ms_median": 0.5349629991542315
+    },
+    "5.0": {
+      "trials": 12,
+      "detected": 12,
+      "mean_ms": 2496.791102842508,
+      "median_ms": 2280.8789457558305,
+      "min_ms": 299.98795929896005,
+      "max_ms": 4947.027381058433,
+      "p95_ms": 4850.590849593573,
+      "theory_mean_ms": 2500.0,
+      "theory_worst_ms": 5000.0,
+      "verify_ms_median": 0.4222649995426764
+    }
+  },
+  "B": {
+    "zones": {
+      "early(0-10%)": {
+        "positions": 100,
+        "caught": 100,
+        "rate": 1.0
+      },
+      "middle(45-55%)": {
+        "positions": 100,
+        "caught": 100,
+        "rate": 1.0
+      },
+      "tail(90-100%)": {
+        "positions": 100,
+        "caught": 100,
+        "rate": 1.0
+      }
+    },
+    "suffix_laundered": false,
+    "tampered": [
+      37,
+      400,
+      999
+    ],
+    "flagged_blocks": 3,
+    "localized": [
+      37,
+      400,
+      999
+    ],
+    "exact": true,
+    "comparisons_per_block": 6,
+    "nblocks": 16
+  },
+  "record_sizes": {
+    "median": 168.0,
+    "min": 157,
+    "max": 280
+  }
+}

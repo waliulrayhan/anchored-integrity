@@ -1,0 +1,44 @@
+{
+  "population": "simulated clinical access sessions (MIMIC-IV-derived base rates)",
+  "features": [
+    "records_accessed",
+    "distinct_patients",
+    "hour_of_day",
+    "write_ratio",
+    "off_hours_flag"
+  ],
+  "excluded_feature": "hashes_recomputed (knowable only by the integrity layer, would be circular)",
+  "auc": 0.7645736087132594,
+  "honest_sessions_test": 1203,
+  "tamper_sessions_test": 117,
+  "score_gate": {
+    "0.3": {
+      "threshold": 0.3,
+      "needless_containments": 45,
+      "fpr": 0.03740648379052369,
+      "tamper_caught": 39,
+      "recall": 0.3333333333333333
+    },
+    "0.5": {
+      "threshold": 0.5,
+      "needless_containments": 6,
+      "fpr": 0.004987531172069825,
+      "tamper_caught": 30,
+      "recall": 0.2564102564102564
+    },
+    "0.7": {
+      "threshold": 0.7,
+      "needless_containments": 2,
+      "fpr": 0.0016625103906899418,
+      "tamper_caught": 23,
+      "recall": 0.19658119658119658
+    }
+  },
+  "deterministic": {
+    "needless_containments": 0,
+    "fpr": 0.0,
+    "tamper_caught": 117,
+    "recall": 1.0,
+    "basis": "cryptographic mismatch -- zero by construction, not measured"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "token": {
+    "n": 12,
+    "validated_correct_data": 12,
+    "validated_wrong_data": 0,
+    "median_bytes": 6007.0
+  },
+  "components": {
+    "record_bytes": 257,
+    "proof_len": 20,
+    "digest_us": 0.74,
+    "verify_us": 10.51,
+    "verify_then_contain_us": 11.31,
+    "contain_actions_only_us": 0.21,
+    "n": 3000
+  },
+  "pbkdf2": {
+    "10k_median": 2.15,
+    "10k_min": 2.05,
+    "10k_max": 10.15,
+    "100k_median": 37.22,
+    "100k_min": 21.4,
+    "100k_max": 69.22
+  },
+  "ratio_100k_vs_verify": {
+    "x": 3541.0,
+    "orders_of_magnitude": 3.5
+  },
+  "ratio_100k_vs_auth_plus_integrity": {
+    "x": 3089.0,
+    "orders_of_magnitude": 3.5
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "token_bytes": 6007,
+  "imprints": [
+    "d7d67fd75adfcf3212598900fa22e3ae2c9798873cc3344e1f8c0f1aeae0a150"
+  ],
+  "sha256_data": "af67c1d6e7904117ded62dba30ec308df78396fc34584d61fca96eca89a176a7",
+  "imprint_matches_data": false,
+  "certs_in_token": 3,
+  "token_subjects": [
+    "subject=C = US, O = \"DigiCert, Inc.\", CN = DigiCert SHA256 RSA4096 Timestamp Responder 2026 1",
+    "subject=C = US, O = \"DigiCert, Inc.\", CN = DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1",
+    "subject=C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert Trusted Root G4"
+  ],
+  "verify_system_store": {
+    "rc": 0,
+    "msg": "Verification: OK"
+  },
+  "wrong_data_rc": 1,
+  "anchor_conn": {
+    "fresh": {
+      "median": 118.30086950067198,
+      "min": 98.51074300240725,
+      "max": 235.193419001007,
+      "n": 20
+    },
+    "keepalive": {
+      "median": 55.28140850037744,
+      "min": 50.12626000097953,
+      "max": 102.02185099842609,
+      "n": 20
+    }
+  },
+  "nonce_present": true
+}

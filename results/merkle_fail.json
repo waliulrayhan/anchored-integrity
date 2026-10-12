@@ -1,0 +1,57 @@
+{
+  "100": {
+    "tested": 100,
+    "failures": 4,
+    "crosses": 4,
+    "failures_equal_crosses": true,
+    "failures_outside_crossing_set": 0,
+    "first": 96,
+    "last": 99
+  },
+  "1000": {
+    "tested": 1000,
+    "failures": 8,
+    "crosses": 8,
+    "failures_equal_crosses": true,
+    "failures_outside_crossing_set": 0,
+    "first": 992,
+    "last": 999
+  },
+  "10000": {
+    "tested": 10000,
+    "failures": 1808,
+    "crosses": 1808,
+    "failures_equal_crosses": true,
+    "failures_outside_crossing_set": 0,
+    "first": 8192,
+    "last": 9999
+  },
+  "100000": {
+    "tested": 22392,
+    "failures": 1696,
+    "crosses": 1696,
+    "failures_equal_crosses": true,
+    "failures_outside_crossing_set": 0,
+    "first": 98304,
+    "last": 99999
+  },
+  "1000000": {
+    "tested": 22946,
+    "failures": 16960,
+    "crosses": 16960,
+    "failures_equal_crosses": true,
+    "failures_outside_crossing_set": 0,
+    "first": 983040,
+    "last": 999999
+  },
+  "pbkdf2_10000": {
+    "median": 2.109389999532141,
+    "min": 2.0926690012856852,
+    "max": 10.325715000362834
+  },
+  "pbkdf2_100000": {
+    "median": 45.089625999025884,
+    "min": 37.071183000080055,
+    "max": 60.92886899932637
+  }
+}

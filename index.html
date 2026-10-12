@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anchored Integrity and Automated Containment for Clinical Record Stores — code and data</title>
+<meta name="description" content="Reproduction package: scripts, results and data behind a paper on anchored integrity and automated containment for clinical record stores.">
+<style>
+  :root{
+    --paper:#fbfbfc; --ink:#14161a; --dim:#6b7280; --line:#e5e7eb;
+    --card:#ffffff; --acc:#1f4fd8; --acc-soft:#eef2ff; --warn:#b45309; --warn-soft:#fffbeb;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font:16px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--acc)}
+  .wrap{max-width:900px;margin:0 auto;padding:56px 24px 88px}
+  header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
+  h1{font-size:30px;line-height:1.22;letter-spacing:-.015em;margin:0 0 10px;font-weight:650}
+  .byline{color:var(--dim);font-size:15px;margin:0}
+  .byline a{color:var(--dim)}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);
+     margin:44px 0 14px;font-weight:650}
+  h3{font-size:16px;margin:26px 0 8px;font-weight:620}
+  p{margin:0 0 14px}
+  .lead{font-size:17px;color:#33383f;max-width:64ch}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .card + .card{margin-top:14px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f6f7f9;font-weight:650;font-size:11.5px;text-transform:uppercase;
+     letter-spacing:.055em;color:var(--dim);white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+       background:#f3f4f6;padding:2px 6px;border-radius:4px;word-break:break-word}
+  pre{background:#14161a;color:#e7e9ee;padding:16px 18px;border-radius:9px;overflow-x:auto;
+      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;margin:0 0 14px}
+  pre code{background:none;padding:0;color:inherit}
+  .dim{color:var(--dim)}
+  .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);
+        border-radius:8px;padding:15px 17px;margin:18px 0;font-size:14.5px}
+  .note.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+  .note.warn strong{color:var(--warn)}
+  ul{padding-left:22px;margin:0 0 14px}
+  li{margin:7px 0}
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+  .btn{display:inline-block;padding:9px 16px;border:1px solid var(--line);border-radius:8px;
+       background:var(--card);text-decoration:none;color:var(--ink);font-size:14.5px;font-weight:550}
+  .btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+  .btn:hover{border-color:var(--acc)}
+  .btn.primary:hover{opacity:.92}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);
+         color:var(--dim);font-size:13.5px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:14px 16px}
+  .stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+  .stat .v{font-size:21px;font-weight:640;margin-top:4px;letter-spacing:-.01em}
+  .stat .u{font-size:13px;color:var(--dim);margin-top:2px}
+  @media (max-width:600px){
+    .wrap{padding:36px 18px 64px}
+    h1{font-size:24px}
+    th,td{padding:9px 11px}
+    th{white-space:normal}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Anchored Integrity and Automated Containment<br>for Clinical Record Stores</h1>
+  <p class="byline">
+    Md. Waliul Islam Rayhan &middot; Department of Computer Science &amp; Engineering,
+    Jagannath University, Dhaka, Bangladesh &middot;
+    <a href="mailto:waliulrayhan@gmail.com">waliulrayhan@gmail.com</a>
+  </p>
+  <div class="links">
+    <a class="btn primary" href="paper/paper.pdf">Read the paper (PDF)</a>
+    <a class="btn" href="https://github.com/&lt;your-account&gt;/&lt;your-repo&gt;">Source on GitHub</a>
+    <a class="btn" href="docs/architecture.html">Architecture</a>
+    <a class="btn" href="docs/gap-analysis.html">Literature &amp; gap</a>
+  </div>
+</header>
+
+<p class="lead">
+  A clinical record store whose automated containment response rests on evidence a write-path attacker
+  cannot forge: a Merkle log over record digests, its root published to an external RFC&nbsp;3161
+  time-stamping authority, and containment triggered by cryptographic mismatch against that published
+  root. This package holds the code, the result files and the data loaders behind every number in the paper.
+</p>
+
+<h2>Headline results</h2>
+<div class="grid">
+  <div class="stat"><div class="k">Detection delay (T = 0.2 s)</div><div class="v">95 ms</div>
+    <div class="u">median, vs 100 ms expected &middot; 40/40 trials</div></div>
+  <div class="stat"><div class="k">Inclusion proof at 10<sup>6</sup> records</div><div class="v">11 µs</div>
+    <div class="u">20-hash proof &middot; 0 false alarms in 16,800</div></div>
+  <div class="stat"><div class="k">Anchor (external TSA)</div><div class="v">91.9 ms</div>
+    <div class="u">median round trip &middot; 120/120 granted</div></div>
+  <div class="stat"><div class="k">Re-anchoring race</div><div class="v">300 / 300</div>
+    <div class="u">tamper positions refused</div></div>
+</div>
+
+<h2>What is in this package</h2>
+<div class="card">
+<table>
+  <tr><th>Path</th><th>Contents</th></tr>
+  <tr><td><code>scripts/</code></td><td>One measurement script per table or experiment, plus the data fetcher</td></tr>
+  <tr><td><code>results/</code></td><td>The JSON each script wrote — the numbers quoted in the paper</td></tr>
+  <tr><td><code>data/mimic/</code></td><td>MIMIC-III and MIMIC-IV <em>demonstration</em> CSVs (open, no credentialing)</td></tr>
+  <tr><td><code>data/nslkdd/</code></td><td>NSL-KDD benchmark files (third-party)</td></tr>
+  <tr><td><code>figures/</code></td><td>Architecture diagram (PNG) and the HTML that renders it</td></tr>
+  <tr><td><code>docs/</code></td><td>Rendered architecture and literature-review pages</td></tr>
+  <tr><td><code>paper/</code></td><td><code>paper.tex</code> and <code>paper.pdf</code></td></tr>
+</table>
+</div>
+
+<h2>Which script produces which table</h2>
+<div class="card">
+<table>
+  <tr><th>Paper artifact</th><th>Script</th><th>Result file</th></tr>
+  <tr><td>Table II — Merkle scale</td><td><code>r5all.py</code></td><td><code>ROUND5.json</code></td></tr>
+  <tr><td>Table III — Merkle failing span</td><td><code>span_ii.py</code>, <code>merkle_fail.py</code></td><td><code>span_ii.json</code>, <code>merkle_fail.json</code></td></tr>
+  <tr><td>Table IV — anchor round trip, detection delay</td><td><code>r5delay2.py</code>, <code>r5token.py</code></td><td><code>round5_delay2.json</code>, <code>round5_token.json</code></td></tr>
+  <tr><td>Table V — gating on one population</td><td><code>s3d.py</code></td><td><code>apples.json</code></td></tr>
+  <tr><td>Table VI — both stores client-server</td><td><code>r5all.py</code></td><td><code>ROUND5.json</code></td></tr>
+  <tr><td>Sec. VI-C — re-anchoring race</td><td><code>s4.py</code></td><td><code>stage4.json</code></td></tr>
+  <tr><td>Sec. VI-E — out-of-domain verifier</td><td><code>stage2.py</code></td><td><code>stage2.json</code>, <code>m3.json</code></td></tr>
+  <tr><td>TSA token chain validation</td><td><code>r5token.py</code></td><td><code>round5_token.json</code></td></tr>
+  <tr><td>immudb tamper test</td><td><code>tamper2.py</code></td><td><code>baseline_result.json</code></td></tr>
+</table>
+</div>
+
+<h2>Running it</h2>
+<pre><code>pip install -r requirements.txt
+python scripts/fetch_data.py        # openly redistributable demos, no credentialing
+
+python scripts/r5all.py             # Tables II and VI, component costs, storage medium
+python scripts/r5delay2.py          # Table IV
+python scripts/r5token.py           # anchor round trip, connection reuse, chain validation
+python scripts/span_ii.py           # Table III</code></pre>
+
+<p class="dim">
+  Scripts resolve paths relative to the repository root and honour <code>DATA_DIR</code>,
+  <code>NSLKDD_DIR</code>, <code>RESULTS_DIR</code>, <code>WORK_DIR</code> and <code>IMMUDB_BIN</code>.
+  The baseline and tamper test need an <code>immudb</code> v1.11 binary; the anchor scripts need
+  <code>openssl</code> and outbound HTTPS to a public TSA.
+</p>
+
+<h2>Scope, stated plainly</h2>
+<div class="note warn">
+  <p><strong>The guarantee is narrow.</strong> A modification that changes <em>stored bytes</em> is detected.
+  Exfiltration, ransomware without a retained comparison, and misuse of legitimate credentials are out of
+  scope — none of them produces a digest mismatch.</p>
+  <p><strong>Containment needs a verifier outside the attacker's domain.</strong> An in-domain attacker who
+  controls the code can suppress its own containment. The prototype here runs the verifier as a separate
+  process on the same host: that shows the detection logic does not depend on store-side state, but it is
+  <em>not</em> a genuinely separate trust domain.</p>
+  <p><strong>The prefix check does not scale to short intervals at large stores.</strong> It recomputes the
+  root over the first <em>k</em> leaves (<code>O(k)</code>); consistency proofs were not implemented. A full
+  audit costs 0.67 s at 10<sup>6</sup> records — longer than a 0.2 s interval — so the short-interval and
+  large-store results are not combined.</p>
+  <p><strong>The clinical access population is simulated</strong> from MIMIC-IV field structure and
+  admission distributions, labelled by construction. The access layer is password authentication with
+  role-based authorisation and lockout; it is not a zero-trust architecture in the NIST SP&nbsp;800-207 sense.</p>
+</div>
+
+<h2>Data and licensing</h2>
+<p>
+  The MIMIC-III and MIMIC-IV <em>demonstration</em> subsets used here are real, de-identified patient
+  records, openly redistributable and requiring no credentialing — only the full MIMIC databases do.
+  NSL-KDD is a third-party benchmark, over two decades old and not healthcare data; it is used only as a
+  reproducible source of network-flow feature distributions. Neither dataset is covered by this
+  package's MIT licence.
+</p>
+
+<footer>
+  Code released under the MIT Licence. Third-party data retains its own terms.
+  If you use this package, please cite the paper and the repository.
+</footer>
+
+</div>
+</body>
+</html>

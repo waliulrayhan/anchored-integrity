@@ -1,0 +1,26 @@
+{
+  "up1": 1,
+  "baseline": {
+    "n_records": 200,
+    "verifiedSet_median_ms": 8.499116500388482,
+    "verifiedSet_p95_ms": 10.941779000859242,
+    "verifiedGet_median_ms": 0.9544114991513197,
+    "verifiedGet_p95_ms": 1.1941360007767798,
+    "txId": "200"
+  },
+  "port_freed_s": 1,
+  "val_file": "00000000.val",
+  "val_bytes": 57931,
+  "record_offset": 379,
+  "flipped_offset": 526,
+  "record_len": 295,
+  "found_record_bytes": true,
+  "up2": 1,
+  "tamper": {
+    "verified_get_detected": true,
+    "verified_get_error": "_InactiveRpcError: <_InactiveRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNKNOWN\n\tdetails = \"data is corrupted: value length or digest mismatch\"\n\tdebug_error_string = \"UNKNOWN:data is corrupted: value length or digest mismatch\"\n>",
+    "verified_get_identical_to_original": null,
+    "verified_get_len": null,
+    "unverified_get_identical": null
+  }
+}

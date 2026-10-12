@@ -1,0 +1,99 @@
+{
+  "store": {
+    "records": 200,
+    "median_bytes": 259.5
+  },
+  "selftest": true,
+  "table_ii": {
+    "100000": {
+      "tree_ms": 114,
+      "audit_ms": 142,
+      "proof_len": 17,
+      "gen_us": 3.18,
+      "verify_us": 9.22,
+      "false_failures": 0,
+      "sampled": 16800
+    },
+    "1000000": {
+      "tree_ms": 731,
+      "audit_ms": 671,
+      "proof_len": 20,
+      "gen_us": 5.48,
+      "verify_us": 11.07,
+      "false_failures": 0,
+      "sampled": 16800
+    }
+  },
+  "components": {
+    "record_bytes": 252,
+    "proof_len": 20,
+    "digest_us": 0.7,
+    "verify_us": 10.02,
+    "verify_contain_us": 11.39,
+    "contain_only_us": 0.19,
+    "pbkdf2_10k": {
+      "median": 2.13,
+      "min": 2.11,
+      "max": 2.71
+    },
+    "pbkdf2_100k": {
+      "median": 21.29,
+      "min": 21.12,
+      "max": 37.77
+    }
+  },
+  "ratio": {
+    "pbkdf2_100k_over_verify_contain": 1869,
+    "log10": 3.27
+  },
+  "medium": {
+    "mount": "/dev/vda ext4   rw,relatime,data=ordered",
+    "fsync_median": 0.12,
+    "fsync_p95": 0.18,
+    "no_fsync_median": 0.001,
+    "n": 800
+  },
+  "delay_decomposition": {
+    "T_s": 1.0,
+    "trials": 20,
+    "tsa": "https://rfc3161.ai.moda",
+    "tick_median": 419.03,
+    "tick_mean": 395.01,
+    "rtt_median": 137.12,
+    "rtt_mean": 144.84,
+    "total_median": 566.9,
+    "total_mean": 539.85,
+    "tickrtt_median_sum": 556.15,
+    "median_mean_sum": 539.9
+  },
+  "immudb": {
+    "verified_write": {
+      "median": 6.405,
+      "p95": 7.77
+    },
+    "unverified_write": {
+      "median": 6.326,
+      "p95": 7.564
+    },
+    "verified_read": {
+      "median": 0.524,
+      "p95": 0.8
+    },
+    "unverified_read": {
+      "median": 0.377,
+      "p95": 0.592
+    }
+  },
+  "ours": {
+    "write": {
+      "median": 0.395,
+      "p95": 5.54
+    },
+    "read": {
+      "median": 0.215,
+      "p95": 7.03
+    },
+    "proofs_verified": 1000,
+    "reads": 1000
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "seed": 20261011,
+  "selftest": true,
+  "A": {
+    "1.0": {
+      "trials": 40,
+      "detected": 40,
+      "mean_ms": 570.7140134372821,
+      "median_ms": 587.3658377749962,
+      "min_ms": 24.960289540103986,
+      "max_ms": 969.7194522377686,
+      "p95_ms": 953.1880281701888,
+      "formula_mean_ms": 500.0,
+      "formula_worst_ms": 1000.0,
+      "verify_ms_median": 0.7721374995526276
+    },
+    "5.0": {
+      "trials": 12,
+      "detected": 12,
+      "mean_ms": 1458.072790824038,
+      "median_ms": 1445.0401015828902,
+      "min_ms": 61.51763467460114,
+      "max_ms": 3447.9642212936596,
+      "p95_ms": 2895.499072561506,
+      "formula_mean_ms": 2500.0,
+      "formula_worst_ms": 5000.0,
+      "verify_ms_median": 0.6610555001316243
+    }
+  },
+  "B": {
+    "zones": {
+      "early (positions 0-99)": {
+        "positions": 100,
+        "caught": 100,
+        "rate": 1.0
+      },
+      "middle (450-549)": {
+        "positions": 100,
+        "caught": 100,
+        "rate": 1.0
+      },
+      "tail (900-999)": {
+        "positions": 100,
+        "caught": 100,
+        "rate": 1.0
+      }
+    },
+    "suffix_prefix_check_passes": true,
+    "tampered": [
+      37,
+      400,
+      999
+    ],
+    "blocks_flagged": 3,
+    "localized": [
+      37,
+      400,
+      999
+    ],
+    "exact": true,
+    "block_size": 64,
+    "comparisons_per_block": 6,
+    "nblocks": 16
+  }
+}

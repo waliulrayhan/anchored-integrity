@@ -1,0 +1,11 @@
+{
+  "port_freed_after_s": 1,
+  "flipped_offset": 28965,
+  "val_bytes": 57931,
+  "restart_up_s": 1,
+  "tamper": {
+    "verifiedGet_detected": false,
+    "error": "",
+    "unverified_get_len": 295
+  }
+}

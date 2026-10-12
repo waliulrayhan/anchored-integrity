@@ -1,0 +1,35 @@
+{
+  "selftest": true,
+  "integrity": {
+    "1e5": {
+      "n": 100000,
+      "tree_ms": 183.1991229992127,
+      "audit_ms": 173.44381400107522,
+      "proof_len": 17,
+      "gen_us": 2.4979999579954892,
+      "verify_us": 8.919003448681906,
+      "false_failures": 0,
+      "sampled": 12000
+    },
+    "1e6": {
+      "n": 1000000,
+      "tree_ms": 1242.9426159978902,
+      "audit_ms": 1293.8771389999602,
+      "proof_len": 20,
+      "gen_us": 4.763000106322579,
+      "verify_us": 11.05699993786402,
+      "false_failures": 0,
+      "sampled": 12000
+    }
+  },
+  "components": {
+    "record_bytes": 259,
+    "digest_us": 0.6560003384947777,
+    "proof_len": 20,
+    "proof_verify_us": 10.671499694581144,
+    "detect_alert_contain_us": 10.994001058861613,
+    "pbkdf2_10k_ms": 2.1411199995782226,
+    "pbkdf2_100k_ms": 33.28874100043322,
+    "write_e2e_ms": 33.28874100043322
+  }
+}

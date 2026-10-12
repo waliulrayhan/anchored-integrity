@@ -1,0 +1,73 @@
+{
+  "seed": 20261012,
+  "timing": {
+    "100000": {
+      "records": 100000,
+      "tree_construction_s": 0.1827656859986746,
+      "single_proof_gen_us": 18.28699987527216,
+      "single_proof_gen_p95_us": 26.474001060705632,
+      "proof_length_hashes": 17,
+      "two_hundred_proofs_s": 0.00407642800018948,
+      "proof_verify_us": 14.927500160411,
+      "proof_verify_p95_us": 15.927000276860781,
+      "full_store_audit_ms": 81.07988600022509,
+      "false_verification_failures": 0,
+      "verify_tests": 200
+    },
+    "1000000": {
+      "records": 1000000,
+      "tree_construction_s": 1.0648554689996672,
+      "single_proof_gen_us": 15.3165001393063,
+      "single_proof_gen_p95_us": 20.006998965982348,
+      "proof_length_hashes": 20,
+      "two_hundred_proofs_s": 0.0031822870005271398,
+      "proof_verify_us": 10.812499567691702,
+      "proof_verify_p95_us": 11.534999430296011,
+      "full_store_audit_ms": 455.2316039989819,
+      "false_verification_failures": 0,
+      "verify_tests": 200
+    }
+  },
+  "gt": {
+    "loop": {
+      "flows": 4000,
+      "attacks": 2284,
+      "honest": 1716,
+      "base_rate": 0.571,
+      "score_contained": 1518,
+      "score_true_attacks": 1474,
+      "score_honest": 44,
+      "recall": 0.6453590192644484,
+      "fpr": 0.02564102564102564
+    },
+    "combined": {
+      "flows": 3002,
+      "scored": 3000,
+      "crypto_injected": 2,
+      "attacks": 1676,
+      "honest": 1324,
+      "score_contained": 1138,
+      "score_true_attacks": 1102,
+      "score_honest": 36,
+      "recall": 0.6575178997613366,
+      "fpr": 0.027190332326283987
+    }
+  },
+  "ood": {
+    "honest_agree": 40,
+    "honest": 40,
+    "tamper_detected": 40,
+    "tamper": 40,
+    "rewrite_detected": 40,
+    "rewrite": 40,
+    "records": 240,
+    "trials": 120,
+    "bytes_served": 5299,
+    "root_source": "anchored root written at anchor time into a file the verifier holds, never read from the store",
+    "fetch_ms_median": 0.22731349963578396,
+    "recompute_ms_median": 0.2173174998461036,
+    "total_ms_median": 0.4476114982026047,
+    "total_ms_p95": 0.5282359998091124,
+    "caveat": "separate process and a separate root copy, but the same host; a deployment needs a separate administrative domain"
+  }
+}

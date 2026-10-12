@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Literature Review & Gap — Zero-Trust Healthcare Data Protection</title>
+<style>
+  :root{--paper:#f5f5f5;--ink:#2d3142;--muted:#4f5d75;--accent:#eb6c36;--link:#2e5aa8;--line:#d8d8dc;--white:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Geist','Segoe UI',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;padding:48px 24px 96px}
+  .wrap{max-width:1000px;margin:0 auto}
+  .eyebrow{font-family:ui-monospace,'Geist Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+  h1{font-size:34px;line-height:1.2;letter-spacing:-.01em;margin-bottom:10px;font-weight:600}
+  .sub{color:var(--muted);font-size:16px;margin-bottom:36px;max-width:74ch}
+  h2{font-size:21px;margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:600}
+  h3{font-size:16px;margin:26px 0 8px;font-weight:600}
+  p{margin-bottom:12px}
+  ul{margin:0 0 14px 20px}li{margin-bottom:7px}
+  table{width:100%;border-collapse:collapse;background:var(--white);font-size:13.5px;margin:14px 0 20px;border:1px solid var(--line)}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#ececed;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  a{color:var(--link)}
+  .num{font-family:ui-monospace,monospace;color:var(--muted);width:30px}
+  .callout{background:var(--white);border-left:3px solid var(--accent);padding:16px 18px;margin:20px 0;border-radius:2px}
+  .callout strong{color:var(--ink)}
+  .gap{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--accent);padding:16px 18px;margin:14px 0;border-radius:2px}
+  .gap b{display:block;font-size:13px;font-family:ui-monospace,monospace;color:var(--accent);margin-bottom:4px;letter-spacing:.04em}
+  .tag{display:inline-block;font-family:ui-monospace,monospace;font-size:11px;padding:2px 7px;border-radius:2px;background:#e6e8ec;color:var(--muted);margin-right:5px}
+  footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Step 4 · Reading & gap analysis</div>
+  <h1>Literature review &amp; research gap</h1>
+  <p class="sub">Zero-trust access control + a closed detect&nbsp;&rarr;&nbsp;alert&nbsp;&rarr;&nbsp;auto-mitigate response loop for healthcare data, against an outsider attacker. 26 sources read; the 22 that carry weight are listed with what each one actually establishes.</p>
+
+  <div class="callout">
+    <strong>Read this part first.</strong> The literature is strong on <em>detection</em>, thin on <em>closing the loop</em>, and in healthcare specifically, zero-trust work is mostly frameworks with no working artifact. That combination is our opening — and one 2026 systematic review says so explicitly: detection models hit strong benchmarks, but "the operationalization of automated response within clinical settings remains nascent."
+  </div>
+
+  <h2>Group A — Zero-trust in healthcare</h2>
+  <table>
+    <tr><th class="num">#</th><th>Source</th><th>What it establishes</th><th>Limitation</th></tr>
+    <tr><td class="num">1</td><td><a href="https://www.mdpi.com/2076-3417/11/16/7499">MDPI Applied Sciences 11(16):7499 (2021)</a></td><td>Zero-trust transition framework for healthcare; validated in a Cisco CML simulation.</td><td>Framework/transition study — no per-record integrity, no automated mitigation.</td></tr>
+    <tr><td class="num">2</td><td>Sahu, <em>Healthcare Zero-Trust Resilience Architecture (HZTRA)</em> (2025)</td><td>Practitioner model with continuous monitoring + incident response among its domains. Closest zero-trust prior work.</td><td>Conceptual model, no implementation, no empirical evaluation.</td></tr>
+    <tr><td class="num">3</td><td><a href="https://www.researchgate.net/publication/389015926_Cybersecurity_Access_Control_Framework_Analysis_in_a_Healthcare_Institution">Tomlinson et al., <em>Cybersecurity Access Control: Framework Analysis in a Healthcare Institution</em></a></td><td>Cost study moving a hospital from perimeter (PBSM) to zero-trust: 5-yr TCO $22.9M &rarr; $68.7M; ZTA adoption ~1% of large orgs.</td><td>Economics only — tells us <em>why</em> adoption is slow, not how to build it.</td></tr>
+    <tr><td class="num">4</td><td><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf">NIST SP 800-207 (via CSE Canada ITSM.10.008 guidance)</a></td><td>The canonical definition of zero-trust (PDP/PEP, per-request evaluation).</td><td>Generic IT — nothing healthcare- or response-specific.</td></tr>
+  </table>
+  <p><span class="tag">Pattern</span>Every healthcare zero-trust paper here stops at "adopt zero trust." None ships the enforcement + monitoring mechanism.</p>
+
+  <h2>Group B — Tamper-evident integrity & audit logs</h2>
+  <table>
+    <tr><th class="num">#</th><th>Source</th><th>What it establishes</th><th>Limitation</th></tr>
+    <tr><td class="num">5</td><td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11381610/">Ullah et al., blockchain-enabled EHR access auditing (2024)</a></td><td>Immutable audit trail + purpose-based access control (PBAC) + smart contracts for compliance auditing.</td><td>Ethereum/gas overhead; audit-of-access focus — doesn't protect the record bytes themselves.</td></tr>
+    <tr><td class="num">6</td><td><a href="https://www.nature.com/articles/s41598-025-94339-w">Pampattiwar et al., <em>Sci. Reports</em> (2025)</a></td><td>Dual-blockchain EHR model + context-sensitive rule engine blocking SQLi/XSS/DDoS at header level.</td><td>Heavy; integrity rests on ledger immutability, not on detecting an already-written record being altered.</td></tr>
+    <tr><td class="num">7</td><td><a href="http://www.nrfhh.com/index.php/journal/article/download/824/462/1634">Sharma, lightweight permissioned-blockchain EHR integrity (Hyperledger Fabric + SHA-256)</a></td><td>Off-chain records, on-chain hashes: <strong>0.005 s hash/record, ~50 ms chaincode, 100% simulated tamper detection, ~1,822 TPS</strong>.</td><td>Verification is a separate audit act, not a live loop with an automated response; Fabric deployment complexity.</td></tr>
+    <tr><td class="num">8</td><td><a href="https://vtechworks.lib.vt.edu/server/api/core/bitstreams/7f721717-66cb-430f-866c-dd138e05d326/content">Harpocrates — privacy-preserving immutable audit log (Hyperledger Fabric + ZKP)</a></td><td>Store/share/access logged with full anonymity, public verifiability, temporal access control.</td><td>Cryptographic cost; about the <em>log</em>, not the clinical record, and no response action.</td></tr>
+    <tr><td class="num">9</td><td><a href="https://www.sciencedirect.com/science/article/abs/pii/S2211883726001097">MyHealth@EU blockchain evidence layer (2026)</a></td><td>GDPR/ReEIF-aligned audit trail as a gateway-adjacent add-on; &gt;95% bilateral attestation coverage; explicitly keeps ledger off the message path.</td><td>Cross-border exchange evidence; no adversary detection, no mitigation.</td></tr>
+    <tr><td class="num">10</td><td><a href="https://chartvoyant.com/articles/tamper-evident-clinical-records.html">Hash-chain specification for tamper-evident clinical records (2026)</a></td><td>Append-only log, each entry digesting its predecessor; canonical serialization; the walk is secret-free. Also states the limits: a chain proves nothing about falsity when written, and an adversary controlling the write path can recompute forward — <strong>tamper-evidence needs an anchor outside the suspect range.</strong></td><td>A specification, not an evaluated system. Its honesty is the most useful thing for our threat-model section.</td></tr>
+    <tr><td class="num">11</td><td><a href="https://idus.us.es/server/api/core/bitstreams/fba3e4fe-4b58-4c4e-a367-ddd7be0e4535/content">Blockchain SOA for consent management + auditing (FHIR, GDPR)</a></td><td>Consents and access events on a permissioned ledger so supervisory authorities can audit without the org's cooperation; notes insider/identity-theft detection via access-pattern analysis.</td><td>Interoperability/economies of scale; blockchain trade-offs acknowledged, no mitigation loop.</td></tr>
+    <tr><td class="num">12</td><td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7892683/">Pattengale &amp; Hudson, <em>BMC Medical Genomics</em> (2020)</a></td><td>Production audit logging for genomic data access with blockchain verification.</td><td>Access logging only; no integrity check on the stored record.</td></tr>
+    <tr><td class="num">13</td><td><a href="https://www.mdpi.com/2227-9717/13/5/1466">MDPI Processes 13(5):1466 (2025) — hybrid AI + blockchain for internet hospitals</a></td><td>Combines anomaly detection with ledger-backed records in a hospital setting.</td><td>Detection and storage are parallel tracks, not a single closed response path.</td></tr>
+  </table>
+  <p><span class="tag">Pattern</span>Blockchain gives tamper-<em>evidence</em> at the cost of weight, and almost always for the audit log or sharing layer. Per-record integrity that is cheap enough to run inline, on every write, is not the thing these papers build.</p>
+
+  <h2>Group C — Detection: anomaly &amp; deviation models</h2>
+  <table>
+    <tr><th class="num">#</th><th>Source</th><th>What it establishes</th><th>Limitation</th></tr>
+    <tr><td class="num">14</td><td><a href="https://neurips.cc/">NeurIPS 2025 — Detecting Data Deviations in EHR</a></td><td>Bi-level knowledge distillation; AUC 0.93–0.95 on MIMIC-III + NUH Singapore.</td><td>Detects documentation/data-entry deviation (quality), not adversarial tampering by an outsider.</td></tr>
+    <tr><td class="num">15</td><td><a href="https://ijisae.org/">IJISAE 2024 — <em>Integrity Shield</em></a></td><td>Isolation-Forest real-time integrity monitoring for healthcare IoT.</td><td>Detection output only; no access control, no response.</td></tr>
+    <tr><td class="num">16</td><td><a href="https://www.usenix.org/conference/usenixsecurity23">USENIX Security 2023 — <em>How to Cover up Anomalous Accesses to EHR</em></a></td><td>Adversaries can evade EHR access-anomaly detection on real hospital logs. Establishes that detection alone is defeatable.</td><td>Offensive study — a warning, not a defense. Directly motivates defense-in-depth + tamper evidence.</td></tr>
+    <tr><td class="num">17</td><td>Naik et al. (2025), hybrid DL for H-IoT (VAE + Mahalanobis)</td><td>Tamper detection TPR 94.6% / FPR 3.7% / F1 92.8% on H-IoT traffic.</td><td>Traffic-level; response layer absent.</td></tr>
+    <tr><td class="num">18</td><td><a href="https://www.mdpi.com/2079-9292/12/17/3541">SafetyMed, MDPI Electronics 12(17):3541 (2023)</a></td><td>CNN-LSTM IDS for IoMT covering both image and sequential intrusions; 97.63% avg accuracy, F1 97.73%.</td><td>Pure IDS; no mitigation, no zero-trust enforcement; author notes it can't be compared like-for-like.</td></tr>
+    <tr><td class="num">19</td><td><a href="https://www.mdpi.com/2078-2489/16/8/669">HBiLD-IDS, MDPI Information 16(8):669 (2025)</a></td><td>BiLSTM-DNN on <strong>CICIoMT2024</strong> (40 IoMT devices, 18 attack scenarios, 8.7M flows): 98.81% accuracy across 19 attack types.</td><td>Detection accuracy at scale; expensive model on a benchmark — no access control, no response, no latency of mitigation.</td></tr>
+    <tr><td class="num">20</td><td><a href="https://www.mdpi.com/2076-3417/13/20/11145">GA-RF for IoMT, MDPI Applied Sciences 13(20):11145 (2023)</a></td><td>Hybrid genetic algorithm + Random Forest on NSL-KDD and UNSW-IoT-Botnet; reports 99.999% accuracy.</td><td>Numbers at this level signal leakage/overlap; benchmark-only, no deployment story.</td></tr>
+    <tr><td class="num">21</td><td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11978955/">Waghmode et al. (2025), ML IDS on NSL-KDD / CICIDS2017 / UNSW-NB15</a></td><td>Exhaustive feature selection + LS-SVM: 99.3% NSL-KDD, 99.5% CICIDS2017, 93.3% UNSW-NB15; sub-3 s test time.</td><td>Balanced/undersampled benchmarks — flattering numbers that don't survive a realistic class mix (see our own evaluation).</td></tr>
+    <tr><td class="num">22</td><td><a href="https://www.mdpi.com/2076-3417/13/11/6610">Ban et al., MDPI Applied Sciences 13(11):6610 (2023)</a></td><td>SOAR/SIEM design for automated security operations.</td><td>Enterprise-generic; no clinical constraints or healthcare threat model.</td></tr>
+  </table>
+  <p><span class="tag">Pattern</span>Detection is a crowded, saturated bench. Accuracy claims are inflated by balancing choices and non-temporal splits, and none of these papers measures the cost of the <em>response</em> step.</p>
+
+  <h2>Group D — Response, orchestration, and the closest matches</h2>
+  <table>
+    <tr><th class="num">#</th><th>Source</th><th>What it establishes</th><th>Limitation</th></tr>
+    <tr><td class="num">23</td><td><a href="https://exa.ai/library/publication/ll8gwswyxfl">Khandre &amp; Bhide, <em>AI-Driven Automated Incident Response in Healthcare Cybersecurity</em> (2026, PRISMA)</a></td><td>1,499 records &rarr; 20 studies. Finds AI detection models benchmark well but automated response in clinical settings is nascent; SOAR adoption matures slowly; prevailing approaches "fall short in delivering real-time mitigation and recovery." Calls for end-to-end architectures beyond detection.</td><td>A review — it names the gap without filling it. <strong>This is our best single citation for the gap statement.</strong></td></tr>
+    <tr><td class="num">24</td><td><a href="https://exa.ai/library/publication/cl9yz73n1zv">Deshpande &amp; Singh (2021), AI-assisted security orchestration in healthcare IR</a></td><td>AI-SOAR cuts analyst load and accelerates containment; NHS case studies (Darktrace at Milton Keynes, Bolton NHS); MADE model 97% precision on high-severity events. Names integration, explainability, and adversarial robustness (FGSM, C&amp;W) as open problems.</td><td>Review of vendor practice; no artifact, no measurement of a healthcare-specific loop.</td></tr>
+    <tr><td class="num">25</td><td><a href="https://www.accountablehq.com/post/healthcare-soar-implementation-a-step-by-step-guide-to-security-orchestration-automation-response">Healthcare SOAR implementation guide (2026)</a> + <a href="https://learn.daydream.ai/requirements/hicp-8-10">HICP Practice 8.10 (405(d))</a></td><td>Industry/compliance expectation of automation: playbooks, enrichment, containment with guardrails (block, isolate, disable, revoke, quarantine), approval gates, rollback, and audit-ready run logs. HICP requires <em>evidence that automation works and is governed</em>.</td><td>Guidance, not research — but it legitimises "auto-mitigate with rollback" as the thing healthcare actually needs.</td></tr>
+    <tr><td class="num">26</td><td><strong><a href="https://github.com/AdamChokri/pinkhat-soc">Ornstil, CalPoly thesis — role-aware explainable anomaly detection integrated with OpenEMR</a></strong></td><td>The closest existing match to our loop: LOF / Isolation Forest / autoencoder / GNN detection inside an EHR, LIME-SHAP explanations, and a <strong>3-tier automated response</strong> (email alert &rarr; read-only &rarr; account suspend).</td><td><strong>It is a master's thesis, not a peer-reviewed conference paper</strong>, and it has no zero-trust access layer, no per-record tamper evidence, and no end-to-end latency measurement. Our closest competitor is unwritten as a paper — that is a window, and it also means we must position against it explicitly.</td></tr>
+  </table>
+
+  <h2>The gap</h2>
+  <p>Across all 26 sources, the three capabilities we care about live in three separate literatures and have never been joined:</p>
+
+  <div class="gap"><b>GAP 1 — Zero trust stops at the whiteboard</b>Healthcare zero-trust papers (1–4) are frameworks, transition plans, or cost analyses. Not one implements per-request authorization for a clinical record store and shows it working.</div>
+  <div class="gap"><b>GAP 2 — Tamper evidence is heavy, and aimed at the log, not the record</b>Blockchain work (5–13) protects access trails and sharing, at ledger cost. Lightweight per-record hash verification (7) exists but is invoked as a separate audit step, never inline on the write path with a response attached.</div>
+  <div class="gap"><b>GAP 3 — Detection never closes the loop</b>The detection literature (14–22) is saturated, and the strongest signal in it is USENIX Security 2023 (16): anomaly detection on EHR access is <em>evadable</em>. The response literature (23–25) is reviews and vendor guidance. A 2026 PRISMA review states the gap in plain words: detection is measured, response is not implemented.</div>
+  <div class="gap"><b>GAP 4 — Nobody measures the loop's cost</b>MTTD/MTTR are discussed qualitatively (23–25). No healthcare paper reports the latency of detect &rarr; alert &rarr; mitigate end-to-end per event — which is the only figure that decides whether automated response is clinically admissible.</div>
+  <div class="gap"><b>GAP 5 — The closest match is not a paper</b>Source 26 does most of what we propose, but as a thesis, without a zero-trust layer, without tamper evidence, and without latency numbers.</div>
+
+  <h2>Our contribution, in one sentence</h2>
+  <div class="callout">
+    We present and empirically evaluate a four-layer architecture that unifies (i) zero-trust, role-and-request-gated access to patient records, (ii) lightweight per-record hash-chain tamper evidence, (iii) ML-plus-rule anomaly detection, and (iv) a <strong>closed, automatically executed detect&nbsp;&rarr;&nbsp;alert&nbsp;&rarr;&nbsp;mitigate loop with rollback</strong> — reporting both detection quality and the measured end-to-end latency of mitigation, under an outsider-attacker threat model.
+  </div>
+  <p>Three claims we intend to defend, and one we explicitly will <em>not</em> make:</p>
+  <ul>
+    <li><strong>We claim</strong> integration: the literature has the parts, nobody has assembled them for healthcare with the response step wired up.</li>
+    <li><strong>We claim</strong> measurable mitigation latency at microsecond scale for the integrity and response path — turning MTTR from a slogan into a number.</li>
+    <li><strong>We claim</strong> that rule-based integrity evidence catches what the classifier misses, which is the honest lesson from our own r2l/u2r recall.</li>
+    <li><strong>We do not claim</strong> a better detector. Our RandomForest on a stock NSL-KDD split lands mid-pack, and the papers reporting 99.9% are reporting a balanced-benchmark artifact. Claiming a detection accuracy win would be both false and unnecessary.</li>
+  </ul>
+
+  <footer>Compiled 10 Oct 2026 · 26 sources · every link above was returned by a search run in this task.</footer>
+</div>
+</body>
+</html>
