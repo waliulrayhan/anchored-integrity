@@ -22,27 +22,28 @@
 
 \title{Anchored Integrity and Automated Containment\\ for Clinical Record Stores}
 
-\author{\IEEEauthorblockN{Md. Waliul Islam Rayhan}
-\IEEEauthorblockA{\textit{Department of Computer Science \& Engineering} \\
-\textit{Jagannath University} \\
-Dhaka, Bangladesh \\
-waliulrayhan@gmail.com}
-}
+% \author{\IEEEauthorblockN{Md. Waliul Islam Rayhan}
+% \IEEEauthorblockA{\textit{Department of Computer Science \& Engineering} \\
+% \textit{Jagannath University} \\
+% Dhaka, Bangladesh \\
+% waliulrayhan@gmail.com}
+% }
 
 \maketitle
 
 \begin{abstract}
 We give a clinical record store an automated containment response whose evidence a write-path
 attacker cannot forge. The mechanism publishes the Merkle root of record digests to a
-time-stamping authority outside the hospital trust domain and gates containment on cryptographic mismatch
-against a published root; it works only if publication verifies the anchored prefix first. We implement it on
-a store assembled from the MIMIC-III and MIMIC-IV demonstrations and measure it end to end. With the sweep period set equal to a 0.2\,s anchoring interval, a
+time-stamping authority outside the hospital trust domain and gates containment on cryptographic
+mismatch against a published root; it works only if publication verifies the anchored prefix
+first. We implement it on a store assembled from the MIMIC-III and MIMIC-IV demonstrations and
+measure it end to end. With the sweep period set equal to a 0.2\,s anchoring interval, a
 modification injected under a running workload is detected in a median 95\,ms, against an expected
 100\,ms (40/40 trials), and in 242\,ms including the anchor round trip. A record verifies against
 $10^6$ leaves with a 20-hash proof in 11\,$\mu$s, with zero false alarms over 16{,}800 sampled
-records. Containment on a digest comparison cannot fail on unmodified data;
-gating it on a learned score instead contained 6 innocent sessions out of 1{,}203 at $\tau=0.5$, at the cost of
-26\% recall. A separate process holding its own copy of the root detected every modification in 40/40
+records. Containment on a digest comparison cannot fail on unmodified data; gating it on a learned
+score instead contained 6 innocent sessions out of 1{,}203 at $\tau=0.5$, at the cost of 26\%
+recall. A separate process holding its own copy of the root detected every modification in 40/40
 trials, including when the in-domain root was rewritten. Driven through the same client-server
 interface as immudb, our write path is faster at the median (0.40 against 6.41\,ms) but has a
 heavier tail; we claim no storage-engine advantage.
@@ -55,207 +56,197 @@ containment, healthcare security
 
 \section{Introduction}
 
-Healthcare records are an attractive target for outside attackers, and healthcare organisations adopt zero-trust
-architecture slowly because legacy clinical systems resist microsegmentation~\cite{tyler}. The research response
-has been detection-heavy: a systematic review of automated incident response in healthcare finds detection dominant,
-response underexplored and real-time mitigation least developed~\cite{khandre}. Detection without containment leaves
-the compromised artifact in place.
+Healthcare records are an attractive target for outside attackers, and healthcare organisations adopt
+zero-trust architecture slowly because legacy clinical systems resist microsegmentation~\cite{tyler}. The
+research response has been detection-heavy: a systematic review of automated incident response in healthcare
+finds detection dominant, response underexplored and real-time mitigation the least developed part of the
+literature~\cite{khandre}. Detection without containment leaves the compromised artifact in place.
 
-We address one narrow part of that gap: a clinical record store in which an outside attacker has obtained write
-access to the storage path. We ask what it takes for an automated response to contain a modification \emph{and}
-for that containment to rest on evidence the attacker cannot forge, implementing and measuring a Merkle log over
-record digests whose root is published to a time-stamping authority (TSA) outside the hospital trust domain, with
-containment triggered by cryptographic mismatch. Our contributions are four.
+We address one narrow part of that gap: a clinical record store in which an outside attacker has obtained
+write access to the storage path. We ask what it takes for an automated response to contain a modification
+\emph{and} for that containment to rest on evidence the attacker cannot forge, and we implement and measure a
+Merkle log over record digests whose root is published to a time-stamping authority (TSA) outside the hospital
+trust domain, containment being triggered by cryptographic mismatch. Our contributions are four.
 
 \begin{itemize}
 \item \textbf{The anchoring order is a correctness requirement.} A publication step that re-anchors
 the current store state without first verifying that the previously anchored prefix still hashes to its
-published root silently promotes a tampered state to a trusted root. This is Certificate Transparency's append-only consistency
-requirement~\cite{rfc6962} applied to publication in a clinical store, not a new check; our contribution is the
-measured failure when it is omitted, its cost, and the hole it leaves (Section~\ref{sec:race}).
+published root silently promotes a tampered state to a trusted root. This is the append-only consistency
+requirement of Certificate Transparency~\cite{rfc6962} applied to the publication step of a clinical store, not
+a new check; our contribution is to show the failure when it is omitted, refuse it over 300 tamper positions,
+measure the cost, and state the hole it leaves (Section~\ref{sec:race}).
 \item \textbf{Detection delay is validated and decomposed, not only derived.} We inject modifications under a
-running workload with real RFC~3161 anchoring and report the delay at three intervals, with and without the
-anchor round trip, against its arithmetic expectation (Section~\ref{sec:anchor}).
+running workload with real RFC~3161 anchoring and report modification-to-detection time at three intervals,
+including and excluding the anchor round trip, against the arithmetic expectation (Section~\ref{sec:anchor}).
 \item \textbf{The loop closes only with an out-of-domain verifier, and we prototype one.} An
 in-domain attacker controlling the code can suppress its own containment, so the loop closes only when
 verification is performed by a party holding an independently obtained root. We implement that
 separation, quantify its cost, and show it survives an in-domain root rewrite (Section~\ref{sec:ood}).
-\item \textbf{The price of score gating is measured on one population, and the design is compared against an
-off-the-shelf store through the same interface shape.} We score a learned classifier and the deterministic rule on
-the same simulated sessions, and compare the two stores as client-server systems with a durable commit per write,
-separating immudb's verified and unverified write paths (Sections~\ref{sec:gating} and~\ref{sec:baseline}).
+\item \textbf{The price of score gating is measured on one population, and the design is compared
+against an off-the-shelf store through the same interface shape.} We score a learned classifier and the
+deterministic rule on the same simulated sessions, and compare the two stores as client-server systems
+with a durable commit per write, reporting immudb's verified and unverified write paths separately because
+they differ by only 1\% (Sections~\ref{sec:gating} and~\ref{sec:baseline}).
 \end{itemize}
 
-\noindent\textbf{What this paper does not claim.} External anchoring is not a new primitive: timestamping was
-introduced by Haber and Stornetta~\cite{haber}, tamper-evident logs by Crosby and Wallach~\cite{crosby}, and
-Certificate Transparency~\cite{rfc6962} and RFC~3161~\cite{rfc3161} standardise the components we use. Our Merkle
-construction \emph{is} RFC~6962's --- the $0x00$/$0x01$ domain separation and leaf-domain rule are taken from it,
-and RFC~9162~\cite{rfc9162} supersedes it unchanged --- and verify-before-publish is likewise that literature's
-consistency requirement. Our contribution is the measured failure and cost of omitting it, the delay, the verifier
-separation and the population-correct gating comparison, not the primitive. We claim no zero-trust architecture in the NIST SP~800-207
-sense~\cite{nist800207} --- our access layer lacks multi-factor authentication, device posture and continuous risk
-evaluation --- and no detection of exfiltration, ransomware or credential misuse, none of which a deterministic
-integrity check sees (Section~\ref{sec:nongoals}).
+\noindent\textbf{What this paper does not claim.} External anchoring is not a new primitive:
+timestamping was introduced by Haber and Stornetta~\cite{haber}, tamper-evident logs by Crosby and
+Wallach~\cite{crosby}, and Certificate Transparency~\cite{rfc6962} and RFC~3161~\cite{rfc3161}
+standardise the components we use. Our Merkle construction \emph{is} RFC~6962's: the $0x00$/$0x01$ domain
+separation and the leaf-domain rule are taken from it, and RFC~9162~\cite{rfc9162} supersedes it with the same
+construction. Verify-before-publish is likewise the consistency requirement of that literature. Our
+contribution is the measured failure and cost of omitting it, the measured delay, the verifier separation and
+the population-correct gating comparison, not the primitive. We claim no zero-trust architecture in the NIST
+SP~800-207 sense~\cite{nist800207} our access layer lacks multi-factor authentication, device posture and
+continuous risk evaluation and no detection of exfiltration, ransomware or credential misuse, none of which
+a deterministic integrity check sees (Section~\ref{sec:nongoals}).
 
 \section{Related Work}
 
 \subsection{Adoption, Logging Primitives and Clinical Detection}
-Tyler and Viana analyse the barriers to zero-trust transition in healthcare~\cite{tyler} and Sahu proposes a
-practitioner-led reference model for continuous monitoring and response~\cite{sahu}; neither measures a
-containment path. Haber and Stornetta showed a document can be timestamped so its
-existence at a point in time is verifiable~\cite{haber}, and Crosby and Wallach gave efficient tamper-evident logs
-with membership proofs~\cite{crosby}. Certificate Transparency operationalised an append-only Merkle log at
-internet scale and defined the consistency proofs by which a monitor checks that a new root extends an earlier
-one~\cite{rfc6962,rfc9162}; RFC~3161 defines the timestamp protocol we use~\cite{rfc3161}. The property that
-matters is that a log whose root is held outside the writer's trust domain cannot be silently rewritten by that
-writer, which we use rather than propose, benchmarking against an off-the-shelf implementation
-(Section~\ref{sec:baseline}). Xu \emph{et al.} show anomaly-based detection of
-inappropriate EHR access can be evaded by an adversary who knows the detector~\cite{usenix23}, which motivates
-gating containment on evidence rather than a score. Blockchain-based auditing covers EHR access with purpose-based
-control~\cite{heliyonAudit,ijisPbac} and hash chaining~\cite{pandey}, reporting neither the delay nor the cost of
-containment. Learned IoMT detectors~\cite{waghmode,hbild,safetymed} operate on flow features; we use one only as a
-score source.
+Tyler and Viana analyse the barriers to zero-trust transition in healthcare~\cite{tyler} and Sahu
+proposes a practitioner-led reference model for continuous monitoring and incident response~\cite{sahu};
+neither measures a containment path. Haber and Stornetta showed a document can be timestamped so its
+existence at a point in time is verifiable~\cite{haber}, and Crosby and Wallach gave efficient
+tamper-evident logs with membership proofs~\cite{crosby}. Certificate Transparency operationalised
+an append-only Merkle log at internet scale and defined the consistency proofs by which a monitor checks that a
+new root extends an earlier one~\cite{rfc6962,rfc9162}; RFC~3161 defines the timestamp protocol we
+use~\cite{rfc3161}. The property that matters is that a log whose root is held outside the writer's trust
+domain cannot be silently rewritten by that writer. We use that property rather than propose it, benchmarking
+against an off-the-shelf implementation (Section~\ref{sec:baseline}). Xu \emph{et al.} show anomaly-based
+detection of inappropriate EHR access can be evaded by an adversary who knows the detector~\cite{usenix23},
+which motivates gating containment on evidence rather than a score. Blockchain-based auditing covers EHR access
+with purpose-based control~\cite{heliyonAudit,ijisPbac} and hash chaining~\cite{pandey}, reporting neither the
+delay nor the cost of containment. Learned IoMT detectors~\cite{waghmode,hbild,safetymed} operate on flow
+features; we use one only as a score source.
 
 \subsection{Automated Response}
 Khandre and Bhide report that automated response is the least mature part of the
 field~\cite{khandre}. Ornstil presents a role-aware insider-threat system for EHRs with a three-tier
 response and a policy engine (a master's thesis, cited as indicative rather than
-peer-reviewed)~\cite{ornstil}. Adabara \emph{et al.} combine a random-forest flow
-detector with a reinforcement-learning triage agent under a governance rule engine~\cite{adabara}, and Ahmad and
-Gusain automate forensics and response infrastructure as code for IoMT~\cite{ahmad}. These are the closest works to ours, and they differ in
-what they measure: each reports detection quality and a response mechanism; none reports modification-to-detection
-delay under a live anchor, and none prices gating containment on a learned score against a deterministic
-trigger.
+peer-reviewed)~\cite{ornstil}. Adabara \emph{et al.} combine a random-forest flow detector with a
+reinforcement-learning triage agent under a governance rule engine~\cite{adabara}, and Ahmad and Gusain
+automate forensics and response infrastructure as code for IoMT~\cite{ahmad}. These are the closest works
+to ours, and they differ in what they measure: each reports detection quality and a response mechanism, none
+reports modification-to-detection delay under a live anchor, and none prices gating containment on a learned
+score against a deterministic trigger.
 
-\begin{table}[t]
-\caption{Positioning against closest prior work. ``Measured response path'' means the paper reports
-a detection-to-containment latency under stated assumptions.}
-\label{tab:position}
-\centering
-\scriptsize
-\begin{tabular}{p{1.35cm}p{1.5cm}p{1.5cm}p{1.55cm}}
-\toprule
-Work & Threat model & Integrity evidence & Measured response path \\
-\midrule
-Sahu~\cite{sahu} & not stated & not stated & no \\
-Ornstil~\cite{ornstil} & insider misuse & behavioural score & no \\
-Adabara \emph{et al.}~\cite{adabara} & IoMT flow & learned score & no \\
-Ahmad \& Gusain~\cite{ahmad} & IoMT intrusion & not stated & no \\
-Ullah \emph{et al.}~\cite{heliyonAudit,ijisPbac} & write path & blockchain audit & no \\
-Pandey \emph{et al.}~\cite{pandey} & write path & hash chain & no \\
-\textbf{This work} & write path & anchored Merkle root & yes \\
-\bottomrule
-\end{tabular}
-\end{table}
+Against this work, none of the above reports modification-to-detection delay under a live anchor or a measured response path; we claim no better detection and no stronger primitive, only that the containment path is specified, ordered correctly, and measured end to end under a stated cost.
 
 \section{Threat Model}
 \label{sec:threat}
 
 \subsection{Adversary Capabilities}
-The adversary is an outside attacker with no legitimate credentials that has obtained write access to the record
-storage path. Three capabilities matter. \textbf{Capability A (byte modification):} it alters stored bytes without
-recomputing integrity metadata, so the change is content-local. \textbf{Capability B
-(write-path control):} it alters bytes \emph{and} recomputes the hashes the storage layer maintains, which live in
-the same trust domain; against a purely local integrity structure this is undetectable by construction, so we
-present no empirical finding for it --- the anchor's contribution is that the adversary must then alter state
-outside its domain, and Section~\ref{sec:race} covers the ordering error that would let it do so indirectly. \textbf{Capability C (code modification):} it also modifies the code that
+The adversary is an outside attacker with no legitimate credentials that has obtained write access to the
+record storage path. Three capabilities matter. \textbf{Capability A (byte modification):} it alters stored
+record bytes without recomputing integrity metadata, so the change is content-local. \textbf{Capability B
+(write-path control):} it alters bytes \emph{and} recomputes the hashes the storage layer maintains, which
+live in the same trust domain; against a purely local integrity structure this is undetectable by
+construction, so we present no empirical finding for it the anchor's contribution is that the adversary
+must then alter state outside its domain, and Section~\ref{sec:race} covers the ordering error that would
+otherwise let it do so indirectly. \textbf{Capability C (code modification):} it also modifies the code that
 hashes, verifies and contains. A modified verifier reports success, no local mechanism detects that, and
 containment executed by that code can be disabled, so the loop closes only when a process the attacker does
 not control verifies against an independently obtained root (Section~\ref{sec:ood}); the residual assumption
 is in Section~\ref{sec:limits}.
 
 \subsection{Security Objectives}
-\textbf{O1} A modification is detected at the next verification or anchoring opportunity and attributed to a
-specific record. \textbf{O2} Detection rests on evidence the write-path adversary cannot fabricate without altering
-state outside its trust domain. \textbf{O3} Containment follows detection automatically, is bounded in cost, and does
-not disrupt reads of unaffected records. \textbf{O4} Modification-to-detection delay is measured under a live
-workload against its arithmetic expectation.
+\textbf{O1} A modification is detected at the next verification or anchoring opportunity and is
+attributable to a specific record. \textbf{O2} Detection rests on evidence the write-path adversary
+cannot fabricate without altering state outside its trust domain. \textbf{O3} Containment follows
+detection automatically, is bounded in cost, and does not disrupt reads of unaffected records.
+\textbf{O4} Modification-to-detection delay is measured under a live workload and compared with its
+arithmetic expectation.
 
 \subsection{Non-Goals}
 \label{sec:nongoals}
-Exfiltration, ransomware and credential misuse dominate healthcare threat reports, and a deterministic check over
-stored bytes sees none of them: exfiltration leaves records unmodified, ransomware is indistinguishable from any
-other write, and a credentialed insider acting within policy produces no mismatch. We exclude all three; our access
-layer is password authentication with role-based authorisation and lockout, not zero trust in the NIST SP~800-207
+Exfiltration, ransomware and credential misuse dominate healthcare threat reports, and a
+deterministic check over stored bytes sees none of them: exfiltration leaves records unmodified,
+ransomware is indistinguishable from any other write, and a credentialed insider acting within policy
+produces no mismatch. We exclude all three, and our access layer is password authentication with
+role-based authorisation and lockout, not zero trust in the NIST SP~800-207
 sense~\cite{nist800207}.
 
 \section{Proposed Architecture}
 \label{sec:arch}
 
-The system comprises four layers; a request passes through them in order, so the response layer sits in the request
-path rather than in a separate workflow.
+The system comprises four layers; an access request passes through them in order, so the
+response layer sits in the request path rather than in a separate workflow.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.50\columnwidth]{fig_architecture.png}
+\includegraphics[width=1\columnwidth]{fig_architecture.png}
 \caption{Four-layer design. A request passes through L1--L4 in sequence, so the
 response layer acts in the request path. The Merkle root is published to an anchor
 outside the hospital trust boundary, which is what makes Capability~B detectable.}
 \label{fig:arch}
 \end{figure}
 
-\textbf{L1, access control.} PBKDF2-HMAC-SHA256 with per-account salts and a 100{,}000-iteration work factor;
-role-based authorisation over administrator, clinician, nurse and unauthenticated outsider; lockout after repeated
-failures.
+\textbf{L1, access control.} PBKDF2-HMAC-SHA256 with per-account salts and a 100{,}000-iteration work
+factor; role-based authorisation over administrator, clinician, nurse and unauthenticated outsider; lockout
+after repeated failures.
 
 \textbf{L2, integrity.} Record digests $\mathrm{SHA256}(0x00 \,\|\, \mathrm{record})$ form the leaves of
 a Merkle log with RFC~6962 domain separation, internal nodes being $\mathrm{SHA256}(0x01 \,\|\, L \,\|\, R)$
 ~\cite{rfc6962}. The digest is stored with the record and the tree derived, so an inclusion proof is
-$O(\log n)$ hashes and traverses no per-record chain. The root goes to an external TSA; publication is a network
-operation that cannot occur per write, so the anchoring interval is a tunable setting that sets the detection bound
-(Section~\ref{sec:anchor}).
+$O(\log n)$ hashes and traverses no per-record chain. The root is published to an external TSA; publication is
+a network operation that cannot occur per write, so the anchoring interval is a tunable setting that sets the
+detection bound (Section~\ref{sec:anchor}).
 
 \textbf{Verify-before-publish.} A naive publication step serialises the store state, computes its root and
-publishes it; an adversary with Capability~B that has modified records and recomputed local hashes, followed by any
-legitimate write triggering publication, thereby anchors the tampered state as the new trusted baseline.
-Publication must instead recompute the root over the first $k$ leaves ($k$ = the leaf count at the last
-publication), compare it with the root published then, and refuse on mismatch (Section~\ref{sec:race}, 300
-positions).
+publishes it; an adversary with Capability~B that has modified records and recomputed local hashes, followed by
+any legitimate write triggering publication, thereby anchors the tampered state as the new trusted baseline.
+Publication must instead verify the previously anchored prefix: recompute the root over the first $k$ leaves,
+$k$ being the leaf count at the last publication, compare it with the root published then, and refuse on
+mismatch (Section~\ref{sec:race}, 300 tamper positions).
 
-\textbf{L3, detection.} Two complementary checks run: the per-record check verifies an inclusion proof against
-the most recent published root ($O(\log n)$), catching content-local modification, and the anchor check recomputes
-the root over the anchored prefix, catching a whole-store rewrite including recomputed local hashes. The
-complementarity is by design --- the per-record check is insensitive to a coordinated rewrite, the anchor check to
-a single record whose proof is not recomputed. A learned classifier also runs in the loop
-(Section~\ref{sec:gating}) as a second, lower-confidence trigger, never a substitute for the cryptographic
-one.
+\textbf{L3, detection.} Two complementary checks run: the per-record check verifies an individual record's
+inclusion proof against the most recent published root ($O(\log n)$), catching content-local modification, and
+the anchor check recomputes the root over the anchored prefix, catching a whole-store rewrite including
+recomputed local hashes. The complementarity is by design the per-record check is insensitive to a
+coordinated rewrite, the anchor check to a single modified record whose proof is not recomputed. A learned
+classifier also runs in the loop (Section~\ref{sec:gating}) as a second, lower-confidence trigger, never a
+substitute for the cryptographic one.
 
-\textbf{L4, response.} The primary trigger is cryptographic mismatch: a failed inclusion proof or a refused
-publication raises an alert recording the record identifier and the evidence, revokes the session, locks the writing
-account and quarantines the affected record until reviewed, following established healthcare incident-response
-practice~\cite{hicp}. The secondary trigger is a classifier score above a threshold, placing the session in the
-same containment sequence while reads of unaffected records continue. The primary trigger's false-containment rate
-is a property of the digests rather than a threshold --- exactly what Section~\ref{sec:gating} shows the secondary
-trigger lacks.
+\textbf{L4, response.} The primary trigger is cryptographic mismatch: a failed inclusion proof or a
+refused publication raises an alert recording the record identifier and the evidence, revokes the active
+session, locks the writing account and quarantines the affected record until reviewed, following established
+healthcare incident-response practice~\cite{hicp}. The secondary trigger is a classifier
+score above a threshold, placing the session in the same containment sequence while reads of unaffected
+records continue. The primary trigger's false-containment rate is a property of the digests rather than
+of a threshold exactly what Section~\ref{sec:gating} shows the secondary trigger lacks.
 
 \section{Implementation and Evaluation Setup}
 \label{sec:setup}
 
-The prototype is Python; records live in memory in the evaluation harness, and the benchmark store persists them
-through a length-prefixed append log with an \texttt{fsync} per write, so ``durable'' means the write returned only
-after the bytes reached the file system, with no SQLite or WAL layer. The store is assembled from the
-de-identified MIMIC-III and MIMIC-IV demonstrations: 200 episodes (100 each), covering 275 admissions, 4{,}506
-diagnoses, 107{,}727 laboratory events and 18{,}087 prescriptions from MIMIC-IV, plus 129 admissions, 1{,}761
-diagnoses and 76{,}074 laboratory events from MIMIC-III. The median serialised record is 259 bytes (range
-248--357), so a 32-byte digest is 12\% overhead. MIMIC supplies record size, field structure and workload shape,
-and supports no claim about detection quality. The learned score source is a
-Random Forest over NSL-KDD flows~\cite{nslkdd}, dated and non-clinical, used only as a reproducible flow-feature
-source. All integrity and timing numbers come from one released script, as medians over repeated passes on one
-two-vCPU container.
+The prototype is Python; records live in memory in the evaluation harness, and the benchmark store persists
+them through a length-prefixed append log with an \texttt{fsync} per write, so ``durable'' means the write
+returned only after the bytes reached the file system there is no SQLite or WAL layer. The store is
+assembled from the de-identified MIMIC-III and MIMIC-IV demonstrations: 200 episodes (100 each), covering 275
+admissions, 4{,}506 diagnoses, 107{,}727 laboratory events and 18{,}087 prescriptions from MIMIC-IV, plus 129
+admissions, 1{,}761 diagnoses and 76{,}074 laboratory events from MIMIC-III. The median serialised record is
+259 bytes (range 248--357), so a 32-byte digest is 12\% overhead. MIMIC supplies record size, field structure
+and the shape of the clinical access workload, and supports no claim about detection quality. The learned score
+source is a Random Forest over NSL-KDD flows~\cite{nslkdd}, dated and non-clinical, used only as a
+reproducible source of flow-feature distributions. All integrity and timing numbers come from one released
+script, as medians over repeated passes on one two-vCPU container.
 
 \section{Evaluation}
 \label{sec:eval}
 
 \subsection{Verification Correctness and Scale}
 \label{sec:scale}
-Table~\ref{tab:scale} reports the integrity structure at $10^5$ and $10^6$ records. Proof and verification cost
-grow logarithmically: a proof is 20 hashes at $10^6$ records and verifying one costs 11\,$\mu$s, the single figure
-this paper uses for verification. Zero false alarms arose over 16{,}800 sampled untampered records at each size,
-and a full store audit (rebuild plus comparison against the anchored root) costs 0.67\,s at $10^6$.
+Table~\ref{tab:scale} reports the integrity structure at $10^5$ and $10^6$ records. Proof and verification
+cost grow logarithmically: a proof is 20 hashes at $10^6$ records and verifying one costs 11\,$\mu$s the
+single figure this paper uses for verification, quoted unchanged in the abstract and in Section~\ref{sec:cost}.
+Zero false alarms arose over 16{,}800 sampled untampered records at each size, and a full store audit
+(rebuild plus comparison against the anchored root) costs 0.67\,s at $10^6$. Every figure here comes from the
+same released run as the rest of the paper.
 
 \begin{table}[t]
-\caption{Merkle log with RFC~6962 semantics. Proof length, generation and verification are per
-proof; the audit rebuilds the whole tree; false failures are over the sampled untampered records shown.}
+\caption{Merkle log with RFC~6962 semantics. Proof length, generation and verification
+are per proof; the audit rebuilds the whole tree; false failures are counted over the
+sampled untampered records shown.}
 \label{tab:scale}
 \centering
 \scriptsize
@@ -274,44 +265,47 @@ False verification failures & 0/16800 & 0/16800 \\
 \end{table}
 
 Two distinct defects are worth separating, because our earlier draft conflated them. The first is a
-\emph{proof-construction mismatch}: our initial implementation promoted an unpaired node by duplicating it, and
-under that construction untampered records produced false verification failures, while zero appear whenever $n$ is a
-power of two. The rate is not monotone in $n$ and has no closed form, but one rule generates every case: the highest
-level whose node count is odd ends in a single node with no partner, and exactly that node's leaves fail, a
-contiguous run at the end of the store. The unpaired node's span and the failing range are 4 leaves and $[96,99]$ at
-$n=100$, 8 and $[992,999]$ at $1{,}000$, 1{,}808 and $[8{,}192, 9{,}999]$ at $10{,}000$ (18.08\% --- alarming only
-because the span covers 1{,}808 of 10{,}000 leaves), 1{,}696 and $[98{,}304, 99{,}999]$ at $10^5$, and 16{,}960 and
-$[983{,}040, 10^6-1]$ at $10^6$ (1.70\% each). We verified the failing set against the span at every size. The second is a \emph{second-preimage ambiguity} of the
-CVE-2012-2459 kind: under duplication a tree with $2m-1$ leaves and one with $2m$ leaves whose final leaf repeats
-its predecessor produce the same root, so a proof against one verifies against the other; under promotion they do
-not, and all-distinct trees collide under neither rule. That ambiguity is real but did not produce the rates above,
-and it needs the adversary to supply the repeated leaf, so a deployment should treat the mismatch as a liveness
-hazard and the ambiguity as a soundness hazard; the RFC~6962 rule removes both, giving zero false failures from
-$n=1$ to $n=10^6$.
+\emph{proof-construction mismatch}: our initial implementation promoted an unpaired node by duplicating it,
+and under that construction untampered records produced false verification failures nonzero at $n=100$, $1{,}000$, $10{,}000$, $10^5$ and $10^6$ (4.00\%, 0.80\%, 18.08\%, 1.70\%, 1.70\%), and zero whenever $n$ is a power of two. The rate is not monotone in $n$ and has
+no closed form, but one rule generates every case: walking up the tree, the highest level whose node count is
+odd ends in a single node with no partner, and exactly that node's leaves fail a contiguous run at the end
+of the store (e.g.\ $[983{,}040, 10^6-1]$ at $n=10^6$). That is why $n=10{,}000$ looks alarming: the unpaired node there
+covers 1{,}808 of only 10{,}000 leaves. We checked the failing set against the span at every size, and report
+the observed counts rather than a formula. The second is a \emph{second-preimage ambiguity} of the
+CVE-2012-2459 kind: under duplication a tree with $2m-1$ leaves and one with $2m$ leaves whose final leaf
+repeats its predecessor produce the same root, so a proof against one verifies against the other; under
+promotion they do not, and trees whose $2m$ leaves are all distinct collide under neither rule. That ambiguity
+is real but is not what produced the rates above, and it needs the adversary to supply the repeated leaf. A
+deployment should treat the mismatch as a liveness hazard and the ambiguity as a soundness hazard; the RFC~6962
+rule removes both, giving zero false failures from $n=1$ to $n=10^6$.
 
 \subsection{The External Anchor, and Measured Detection Delay}
 \label{sec:anchor}
-The anchor is a real RFC~3161 timestamp from a public TSA. Table~\ref{tab:anchor} reports two independent public
-TSAs over 60 requests each: rfc3161.ai.moda returns in a median 91.9\,ms (p95 130.9\,ms) and tsa.sectigo.com in
-2.59\,s (p95 3.33\,s), all 120 granted. Every request opened a fresh process and TCP/TLS connection and carried a
-fresh nonce, as the delay numbers assume --- the choice matters, since the same requests took 55\,ms over one reused
-connection against 118\,ms fresh, so a connection-reusing client would see roughly half our round trip. We keep the
-conservative figure.
+The anchor is a real RFC~3161 timestamp from a public TSA. Table~\ref{tab:anchor} reports two independent
+public TSAs over 60 requests each: rfc3161.ai.moda returns in a median 91.9\,ms (p95 130.9\,ms) and
+tsa.sectigo.com in 2.59\,s (p95 3.33\,s), all 120 granted. Every request opened a fresh process and TCP/TLS
+connection and carried a fresh nonce, as the delay numbers assume. The choice matters: in a separate comparison
+the same requests took 55\,ms over one reused connection against 118\,ms fresh, so a connection-reusing client
+would see roughly half our round trip. We keep the conservative figure throughout.
 
-The token is 6{,}007 bytes with a three-certificate DigiCert chain, and its chain validates: over 12 tokens from
-\texttt{rfc3161.ai.moda}, \texttt{openssl ts -verify} returned OK against the system trust store in 12 of 12 cases
-and failed in 12 of 12 against different data, so validation is neither vacuous nor only about the imprint.
+The token is 6{,}007 bytes with a three-certificate DigiCert chain, and its chain validates: over 12
+independently obtained tokens from \texttt{rfc3161.ai.moda}, the TSA used in the delay experiments,
+\texttt{openssl ts -verify} returned OK against the system trust store in 12 of 12 cases and failed in 12 of 12
+against different data so validation is neither vacuous nor only about the imprint.
 
-Detection delay is a property of the anchoring interval, not of the cost of a hash comparison. The store is swept
-periodically and here the sweep period equals the anchoring interval $T$, so a modification waits for the next sweep
-(one sweep costs 38\,ms over 2{,}000 records: small here, not against a much shorter interval). The \emph{tick}
-figure is that wait, the \emph{anchor-inclusive} figure adds the round trip. Both used
-\texttt{rfc3161.ai.moda} with a fresh connection per request, and every injected modification was detected.
+Detection delay is a property of the anchoring interval, not of the cost of a hash comparison. The store is
+swept periodically, and in these experiments the sweep period is set equal to the anchoring interval $T$, so a
+modification waits for the next sweep (one sweep costs 38\,ms over 2{,}000 records: small here, not against a
+much shorter interval). The \emph{tick} figure is that wait; the \emph{anchor-inclusive} figure adds the round
+trip. Both used \texttt{rfc3161.ai.moda} with a fresh connection per request, and every injected modification
+was detected.
 
 \begin{table}[t]
-\caption{RFC~3161 round trip (60 requests per vendor, all granted) and measured
-modification-to-detection delay. ``Tick'' is the wait to the catching sweep; ``incl.\ anchor'' adds the
-round trip. All injections detected: 40, 40 and 12 trials.}
+\caption{Real RFC~3161 anchor round trip (60 requests per vendor; all 120 granted), and
+measured modification-to-detection delay under a running workload. ``Tick'' stops the clock at the
+catching verification event; ``incl.\ anchor'' runs through the round trip. Every injected
+modification was detected: 40/40 at each interval for tick, 20/20, 20/20 and 10/10 for
+incl.\ anchor. $T/2$ is the arithmetic expectation for a random offset.}
 \label{tab:anchor}
 \centering
 \scriptsize
@@ -332,58 +326,62 @@ $T$ (s) & \textit{tick} & \textit{incl.\ anchor} & mean: tick $+$ trip \\
 \end{tabular}
 \end{table}
 
-The tick medians (95, 493 and 2488\,ms) sit on the arithmetic expectation $T/2$ (100, 500 and 2500\,ms), and the
-anchor-inclusive figures exceed them by roughly one round trip: the tick delay follows from a once-per-interval
-sweep, so this validates the schedule under a live workload rather than discovering a new relationship. The
-decomposition uses \emph{means}, because means add and medians do not ($100+129=229$; $493+128=621$;
-$2244+142\approx2387$). Those 128--142\,ms trips are means from separate runs, so the tail pulls them above the 91.9\,ms median of the
-60-request series and we treat them as the same order of magnitude, not one quantity. With the slower vendor a
-5\,s interval should be budgeted nearer 5\,s than 2.5\,s.
+The tick medians (95, 493 and 2488\,ms) sit on the arithmetic expectation $T/2$ (100, 500 and 2500\,ms), and
+the anchor-inclusive figures exceed them by roughly one round trip, as they should. Because the tick delay
+follows from a once-per-interval sweep, this validates the schedule under a live workload and decomposes its
+cost; it does not discover a new relationship. The decomposition uses \emph{means}, because means add and
+medians do not: the means close to within 1\,ms ($100+129=229$; $493+128=621$; $2244+142\approx2387$). The
+128--142\,ms trips in that decomposition are higher than the 91.9\,ms median of the 60-request series. They are
+means, so the tail pulls them up, and they come from separate runs, so we treat them as the same order of
+magnitude rather than as one quantity. With the slower vendor a 5\,s interval should be budgeted nearer 5\,s
+than 2.5\,s.
 
 \subsection{The Re-Anchoring Race, and What It Does Not Cover}
 \label{sec:race}
-Verify-before-publish is tested over 300 tamper positions in three regions of the anchored prefix (100 first
-decile, 100 middle, 100 final), every one caught. A modification confined to the suffix written after the last
-anchor is correctly treated as new data and the prefix check passes --- a design limit rather than a bug:
-\emph{the suffix since the last anchor is unprotected until the next anchor completes}, exactly the
-detection-delay window measured above.
+Verify-before-publish is tested over 300 tamper positions in three regions of the anchored prefix (100 in
+the first decile, 100 middle, 100 final), every one caught. A modification confined to the suffix written
+after the last anchor is correctly treated as new data and the prefix check passes a design limit rather
+than a bug: \emph{the suffix since the last anchor is unprotected until the next anchor completes}, exactly
+the detection-delay window measured above.
 
-\emph{Relation to consistency proofs, and cost.} The check is Certificate Transparency's append-only consistency
-requirement~\cite{rfc6962}: a new root must extend the previously published one. CT realises it with
-$O(\log n)$ consistency proofs; our prototype instead recomputes the root over the first $k$ leaves from record
-bytes, which is $O(k)$ and re-hashes the stored records. We did not implement consistency proofs.
+\emph{Relation to consistency proofs, and cost.} The check is the append-only consistency requirement of
+Certificate Transparency~\cite{rfc6962}: a new root must extend the previously published one. CT realises it
+with $O(\log n)$ consistency proofs; our prototype instead recomputes the root over the first $k$ leaves from
+record bytes, which is $O(k)$ and also re-hashes the stored records. We did not implement consistency proofs.
 The consequence is a scaling limit we do not hide: a full audit costs 0.67\,s at $10^6$ records
-(Table~\ref{tab:scale}), longer than a 0.2\,s interval, and the short-interval experiments ran over 2{,}000 records.
-The two results are therefore not combined, and a deployment wanting short intervals at that scale would need
-consistency proofs or an incremental check.
+(Table~\ref{tab:scale}), longer than a 0.2\,s interval, and the short-interval experiments ran over 2{,}000
+records. The two results are therefore not combined, and a deployment wanting short intervals at that scale
+would need consistency proofs or an incremental check.
 
-A refused publication raises an incident, but a prefix mismatch does not name the offending record. We localise by
-recursive bisection rather than claim attribution we do not have: comparing recomputed node hashes level by level
-identifies the modified subtree in $O(\log n)$ comparisons per level. In a 1{,}024-leaf store with block size 64,
-three simultaneous modifications were localised to exactly their blocks over five independent trials with random
-positions (e.g. $\{16,103,832\}\rightarrow\{0,1,13\}$), 16 comparisons per trial, none false or missed. This is
-a demonstration at one store size, not a scaling result; without it the trigger is reportable only as a store-level
-event.
+A refused publication raises an incident, but a prefix mismatch does not name the offending record. We localise it by recursive bisection rather than claim
+attribution we do not have: comparing recomputed node hashes level by level identifies the modified subtree in
+$O(\log n)$ comparisons per level. In a store of 1{,}024 leaves with block size 64, three simultaneous
+modifications were localised to exactly their blocks over five independent trials with randomly drawn positions
+(e.g. $\{16,103,832\}\rightarrow$ blocks $\{0,1,13\}$), 16 block comparisons per trial, none false and none
+missed. This is a demonstration at one store size, not a scaling result. Without localisation the trigger is
+reportable only as a store-level event.
 
 \subsection{Gating Containment on a Learned Score}
 \label{sec:gating}
 The anchor check is deterministic, so its containment behaviour is a property of the digests; the
 classifier is not.
 
-Provenance first. The score gate in Table~\ref{tab:gating} comes from a \emph{separate} Random Forest of 300
-trees trained on the simulated clinical sessions themselves, with a 70/30 train--test split, five session features
-(records accessed, distinct patients, hour of day, write ratio, off-hours flag) and 1{,}320 test sessions ---
-1{,}203 honest, 117 tampered. It is \emph{not} the NSL-KDD model: that classifier sees 41 network flow features
-and cannot score a five-feature session at all, so we trained a second model. Sessions were labelled by
+Provenance first, because our earlier draft was ambiguous about it. The score gate in
+Table~\ref{tab:gating} comes from a \emph{separate} Random Forest of 300 trees trained on the simulated
+clinical sessions themselves, with a 70/30 train--test split, five session features (records accessed,
+distinct patients, hour of day, write ratio, off-hours flag) and 1{,}320 test sessions 1{,}203 honest,
+117 tampered. It is \emph{not} the NSL-KDD model: that classifier sees 41 network flow features and cannot
+score a five-feature clinical session at all, so we trained a second model. Sessions were labelled by
 construction, 80\% of tampers subtle and 20\% obvious, so the classes overlap rather than separating cleanly. An
-earlier attempt used a feature encoding the label directly (AUC~1.00, zero needless containments); we discarded it
-as accidentally rigged. The population and labels are synthetic, from MIMIC-IV field structure and admission
+earlier attempt used a feature encoding the label directly (AUC~1.00, zero needless containments); we discarded
+it as accidentally rigged. Population and labels are synthetic, from MIMIC-IV field structure and admission
 distributions, and the caption says so.
 
 \begin{table}[t]
-\caption{Containment on one population: 1{,}320 synthetic clinical sessions (1{,}203 honest, 117
-tampered), labelled by construction with 80\% subtle tampers. Every FPR here is over honest sessions, every
-recall over tampered ones. The deterministic row is by construction, not a measurement.}
+\caption{Containment on one population: 1{,}320 synthetic clinical sessions (1{,}203
+honest, 117 tampered), labelled by construction with 80\% subtle tampers. Every FPR in
+this paper is over honest sessions, every recall over tampered ones. The deterministic
+row is by construction, not a measurement.}
 \label{tab:gating}
 \centering
 \scriptsize
@@ -399,29 +397,14 @@ Digest mismatch & 0 & 0.0000 & 1.000 \\
 \end{tabular}
 \end{table}
 
-On this population the learned score reaches AUC~0.765 and recall 33\% at the loosest threshold, against 100\% for
-the digest check and with 45 innocent sessions contained rather than none. Tightening the threshold buys
-false-positive reduction at a steep cost in recall: 0.5 removes 39 of the 45 needless containments but loses a quarter
-of the detections. The design implication is that the cryptographic check is the trigger and the score a second,
-lower-confidence signal --- and we rest no claim on the score's discrimination, since the tampered sessions are ours
-and recall partly reflects how we built them.
+On this population the learned score reaches AUC~0.765 and recall at the loosest threshold is 33\%,
+against 100\% for the digest check and with 45 innocent sessions contained rather than none. Tightening the
+threshold buys false-positive reduction at a steep cost in recall: 0.5 removes 39 of the 45 needless
+containments but loses a quarter of the detections it had. The design implication is that the cryptographic
+check is the trigger and the score a second, lower-confidence signal and it is why we rest no claim on the
+score's discrimination: the tampered sessions are ours, so recall partly reflects how we built them.
 
-Two scenarios follow, neither comparable to Table~\ref{tab:gating}, which uses the five-feature session model.
-Both drive the \emph{NSL-KDD} model over \emph{network flows}, the only score source we have with ground-truth
-labels for every item, and ground truth is what turns a containment count into a claim. That model reaches accuracy
-0.783, precision 0.968, recall 0.640, F1 0.770 and AUC~0.963 over 22{,}544 test flows containing 12{,}833 attacks;
-gated at $\tau=0.5$ alone it contains 8{,}480 of them (FPR 0.028) --- a property of that flow population, not of
-the design.
-
-In the first scenario 4{,}000 flows ran through the loop with a live per-flow classifier call (3.62\,ms per flow,
-14.3\,s wall); 2{,}284 were attacks, and the gate at $\tau=0.5$ contained 1{,}535 --- 1{,}490 attacks (65\%) and 45
-honest (2.6\%). The second adds the deterministic trigger, the design we propose: 3{,}000 scored NSL-KDD flows, a
-separate draw (1{,}676 attacks, 1{,}324 honest), plus 2 records modified directly as cryptographic triggers, both
-true positives by construction. The gate contained 1{,}149 of the scored flows --- 1{,}112 attacks (66\%) and 37 honest
-(2.8\%) --- and both modified records, giving 1{,}151 containments in total, the total exceeding the scored
-count by exactly 2: those records were caught only by the cryptographic trigger, which is the point of pairing
-the two. Without the ground-truth split a figure like ``1{,}130 containments'' reads as alert volume with no
-meaning; it is a volume with a false-positive rate attached, one a deterministic trigger never produces.
+Two further scenarios drive the \emph{NSL-KDD} model over \emph{network flows}, the only score source with ground-truth labels per item, and are not comparable to Table~\ref{tab:gating}. That model reaches accuracy 0.783, precision 0.968, recall 0.640 and AUC~0.963 over 22{,}544 test flows (12{,}833 attacks). In the first, 4{,}000 flows ran through the loop with a live per-flow call (3.62\,ms per flow); the gate at $\tau=0.5$ contained 1{,}535 1{,}490 of 2{,}284 attacks (65\%) and 45 of 1{,}716 honest flows (2.6\%). In the second, 3{,}000 scored flows (1{,}676 attacks, 1{,}324 honest) plus 2 directly modified records gave 1{,}151 containments: 1{,}112 attacks (66\%), 37 honest (2.8\%), and the 2 records caught only by the cryptographic trigger, which is the point of pairing the two. Without the ground-truth split such a count is alert volume with no meaning; with it, it carries a false-positive rate a deterministic trigger never produces.
 
 \subsection{Out-of-Domain Verification}
 \label{sec:ood}
@@ -429,34 +412,36 @@ Capability~C bounds the claim: an in-domain verifier can be modified, so the loo
 happens where the attacker is not. We implemented that separation as a second process that never reads the
 store's root, holding instead a root it obtained independently.
 
-Three conditions of 40 trials each settled the verifier: it agreed with the in-domain verifier on unmodified data
-(40/40), detected a modified record (40/40), and still detected it when the in-domain root had been rewritten to
-match the tampered store (40/40) --- the case Capability~C turns on. Its cost is small: fetching the anchored root
-out of band (0.23\,ms), recomputing proofs from bytes it reads directly (0.22\,ms) and validating against its own
-copy total 0.45\,ms median (p95 0.53\,ms) over 5{,}299 bytes. A separate process on the same host is not a
-genuinely separate trust domain: it shows the detection logic does not depend on store-side state, not that an
-attacker with host-level access cannot reach the verifier too. That fetch is a local read, not a token chain
-validation, and the token covers less than it may appear --- it binds the published root to a point in time,
-proving the root existed at issuance, not that it is a correct digest of good data, which follows from the prefix
-verification before publication.
+Three conditions of 40 trials each settled the verifier: it agreed with the in-domain verifier on unmodified
+data (40/40), detected a modified record (40/40), and still detected the modification when the in-domain root
+had been rewritten to match the tampered store (40/40) the case Capability~C turns on. Its cost is small: fetching the anchored root out of band (0.23\,ms),
+recomputing proofs from bytes it reads directly (0.22\,ms) and validating against its own copy total a
+median 0.45\,ms (p95 0.53\,ms) over 5{,}299 bytes. We are explicit that a
+separate process on the same host is not a genuinely separate trust domain: it shows the detection logic does
+not depend on store-side state, not that an attacker with host-level access cannot reach the verifier too. That
+fetch is a local read, not a token chain validation. The token covers less than it may appear it binds the
+published root to a point in time, proving the root existed at issuance, not that it is a correct digest of good
+data, which follows from the prefix verification before publication.
 
 \subsection{Comparison with an Off-the-Shelf Store}
 \label{sec:baseline}
 Our earlier draft compared an in-process per-record loop against immudb's client-server write, which is not a
-comparison. Table~\ref{tab:baseline} drives both through the same interface shape: a client issuing length-prefixed
-requests over loopback, one durable commit per write, one verified read per record, five passes over the same 200
-real records, our client verifying all 1{,}000 inclusion proofs. For us, ``durable'' means a
-\texttt{write}$+$\texttt{fsync} append to a log on \texttt{ext4} (\texttt{/dev/vda}, \texttt{data=ordered} --- a
-local block device, not a network mount, which is what makes a sub-millisecond median plausible); the
-\texttt{fsync} costs a median 0.12\,ms (p95 0.18\,ms), the append without it 0.001\,ms. We did not tune immudb's
-durability settings, so its figures reflect its configuration as run and may not match our \texttt{fsync} semantics.
-Because immudb verifies consistency against its previous state on every write while we defer verification, we also
-drove its unverified write, separating the cost of verification from the cost of the store.
+comparison. Table~\ref{tab:baseline} drives both systems through the same interface shape: a client issuing
+length-prefixed requests over loopback, one durable commit per write, one verified read per record, five passes
+of the same 200 real records, our client verifying all 1{,}000 inclusion proofs. ``Durable'' here means a
+\texttt{write}$+$\texttt{fsync} append to a log on \texttt{ext4} (\texttt{/dev/vda}, \texttt{data=ordered} a
+local block device, not a network mount, which is what makes a sub-millisecond median plausible). The
+\texttt{fsync} itself costs a median 0.12\,ms (p95 0.18\,ms), and the same append without it 0.001\,ms, so
+durability is most of the write cost. We did not tune immudb's durability settings, so its figures reflect its
+configuration as run and are not guaranteed to match our \texttt{fsync} semantics. Because immudb verifies
+consistency against its previous state on every write while our store defers verification, we also drove its
+unverified write, so the table separates the cost of verification from the cost of the store.
 
 \begin{table}[t]
-\caption{Both systems client-server, one durable commit per write and one verified read per
-record, 5 passes $\times$ 200 real records, medians and p95. Interface shape matched; work per write is
-not. immudb's unverified write is shown so the gap cannot be read as its consistency proof.}
+\caption{Both systems as a client-server store with a durable commit per write and a verified
+read per record, 5 passes $\times$ 200 real records, medians and p95. Interface shape matched; work per write is not.
+immudb's unverified write is reported so the gap cannot be read as the cost of its consistency
+proof.}
 \label{tab:baseline}
 \centering
 \scriptsize
@@ -473,92 +458,71 @@ This work & 0.40\,ms & 5.54\,ms & 0.22\,ms & 7.03\,ms \\
 \end{tabular}
 \end{table}
 
-The medians favour our write path, but not because of immudb's consistency proof: its unverified write is
+The medians favour our write path, but the reason is not immudb's consistency proof: its unverified write is
 6.33\,ms against 6.41\,ms verified, a 1\% difference, so the proof does not account for the gap. The plausible
-explanation is the store path itself, a client-server gRPC round trip with a durable commit; we did not isolate it,
-so we offer it as a hypothesis, not a finding, and claim no storage-engine advantage. The medians also hide a
-heavier tail on our side (write p95 5.54\,ms against a 0.40\,ms median; read p95 7.03\,ms against 0.80\,ms,
-since we build a Merkle path per read), which does not come from the \texttt{fsync} at 0.12\,ms, so it arises
-elsewhere in the shared container and we did not isolate it. The comparison is therefore of medians only, and the
-tails favour immudb; it shows the design does not sit on a pathologically slow store, and that its anchoring and
-proof semantics are not free relative to a system keeping integrity state internal. A byte flipped in immudb's
-value log made its verified read fail, so it detects modification in its own domain but holds no state outside it
---- the gap our anchor addresses, not a speed claim. An authenticated clinical write costs about 25\,ms end to end in the run that measured it, essentially all PBKDF2,
-so the storage write is under 2\% of that request.
+explanation is that the difference lies in the store path itself, a client-server gRPC round trip with a durable
+commit; we did not isolate it, so we offer it as a hypothesis rather than a finding, and we claim no
+storage-engine advantage. The medians also hide a heavier tail on our side. Our write p95 is 5.54\,ms against a
+0.40\,ms median, although the \texttt{fsync} costs only 0.12\,ms (p95 0.18\,ms), so the tail arises elsewhere in
+a container shared by client and server, and we did not isolate it. Our read p95 is 7.03\,ms against immudb's
+0.80\,ms, since we build a Merkle path per read. The comparison is therefore of medians only, and the tails
+favour immudb. It establishes that the design does not sit on a pathologically slow store, and that its
+anchoring and proof semantics are not free relative to a system keeping integrity state internal. A byte flipped
+in immudb's value log caused its verified read to fail with ``data is corrupted: value length or digest
+mismatch'': it detects modification in its own domain but holds no state outside it, so a coordinated rewrite of
+that state is not something it can detect the gap our external anchor addresses, not a speed claim. An
+authenticated clinical write costs about 25\,ms end to end in the run that measured it, essentially all of it
+PBKDF2, so the storage write at 0.40\,ms is under 2\% of that request.
 
 \subsection{Cost of the Clinical Path}
 \label{sec:cost}
-Broken down per operation ($n=10^6$ records, medians on one two-vCPU container), integrity work is invisible next
-to authentication: digesting the 259-byte median record costs 0.7\,$\mu$s, verifying its 20-hash proof
-11\,$\mu$s (Table~\ref{tab:scale}), and the whole detect--alert--contain sequence 11.4\,$\mu$s --- which
-\emph{includes} the verification, the containment actions adding only 0.2\,$\mu$s. The durable storage write is
-0.40\,ms. PBKDF2 at 100{,}000 iterations cost 21\,ms in this run and about 25\,ms in the run behind the
-end-to-end write figure, the run-to-run variation noted in Section~\ref{sec:limits}; per authenticated request
-integrity work sits about 1{,}900$\times$ (three orders of magnitude) below authentication, using the 21\,ms
-figure. The dominant cost of the design is therefore not cryptographic but temporal: the anchoring interval that
-sets the detection bound.
+At $n=10^6$, digesting the 259-byte median record costs 0.7\,$\mu$s, verifying its 20-hash proof 11\,$\mu$s (Table~\ref{tab:scale}), and the whole detect--alert--contain sequence 11.4\,$\mu$s, which \emph{includes} the verification (containment adds 0.2\,$\mu$s). The durable storage write is 0.40\,ms. PBKDF2 at 100{,}000 iterations cost 21\,ms in this run and about 25\,ms in the run behind the end-to-end write figure, the run-to-run variation noted in Section~\ref{sec:limits}; per authenticated request, integrity work sits about 1{,}900$\times$ below it (21\,ms basis). The dominant cost of the design is temporal rather than cryptographic: the anchoring interval that sets the detection bound.
 
 \section{Discussion and Limitations}
 \label{sec:limits}
 
-The guarantee is narrow: a modification that changes stored bytes is detected, and the evidence is a root the
-writer cannot rewrite. Five bounds apply. \textbf{Detection is not anomaly detection:} exfiltration, ransomware
-without a retained comparison and credential misuse produce no digest mismatch and are out of scope
-(Section~\ref{sec:nongoals}). \textbf{Containment depends on an out-of-domain verifier:} a same-host process is
-not a separate trust domain, so a deployment needs a genuinely independent one. \textbf{Anchoring costs
-liveness:} at a 5\,s interval a busy store makes an external request every 5\,s, the vendor spread (91.9\,ms
-against 2.59\,s) affects end-to-end delay materially, and an outage stops publication but not verification of
-already-anchored data; the suffix since the last anchor is unprotected until the next anchor completes.
-\textbf{The prefix check does not scale to short intervals at large stores:} it is $O(k)$ and was not combined
-with the $10^6$-record experiments (Section~\ref{sec:race}). \textbf{The clinical workload is simulated and the
-score source is dated:} the gating population is synthetic, labelled by us with a fixed 80/20 subtle-to-obvious
-tamper mix, so the score gate's recall partly reflects that construction, and the NSL-KDD detector is over two
-decades old and network-flow-based, with numbers not comparable to the session table
-(Section~\ref{sec:gating}). Timings come from one two-vCPU container with loopback traffic, so absolute values
-would move on real hardware --- our own runs varied by up to a factor of two on the same container, which is why
-every figure carries a median and a spread --- and the relationships are structural, so we expect them to
-hold.
+The guarantee is narrow: a modification that changes stored bytes is detected, against a root the writer cannot rewrite. Five bounds apply. \textbf{Not anomaly detection:} exfiltration, ransomware and credential misuse produce no digest mismatch (Section~\ref{sec:nongoals}). \textbf{Verifier domain:} the loop closes only with a verifier outside the attacker's domain; a same-host process is not one. \textbf{Anchoring costs liveness:} the vendor spread (91.9\,ms against 2.59\,s) moves end-to-end delay materially, an outage stops publication but not verification of anchored data, and the suffix since the last anchor is unprotected. \textbf{Scale:} the prefix check is $O(k)$ and was not combined with the $10^6$-record experiments (Section~\ref{sec:race}). \textbf{Simulation:} the gating population is synthetic with a fixed 80/20 subtle-to-obvious tamper mix, so score recall partly reflects its construction, and NSL-KDD is over two decades old. Timings come from one two-vCPU container with loopback traffic and varied up to twofold across our runs, hence medians and spreads; we expect the structural relationships, not absolute values, to transfer.
 
 \section{Conclusion and Artifact}
 \label{sec:artifact}
 
-We gave a clinical record store a containment response resting on evidence a write-path attacker cannot forge, and
-measured what it costs. Two results were less comfortable than the rest: anchoring must verify the previously
+We gave a clinical record store a containment response resting on evidence a write-path attacker cannot forge,
+and measured what it costs. Two results were less comfortable than the rest: anchoring must verify the previously
 anchored prefix before publishing, or it promotes a tampered store to a trusted root, and gating containment on a
 learned score contains innocent sessions where a digest comparison contains none, which is why the cryptographic
 check is the trigger and the score secondary. Open work includes a genuinely independent verifier, consistency
-proofs in place of prefix recomputation, and evaluation on live clinical logs in place of the synthetic population
-and the two-decade-old flow dataset used here. The prototype, the script producing every number here, the result
-files behind each table and a README mapping each table to its script are at
-\url{https://api.lindy.ai/api/files/artifacts/6acbced7da5a0344299b00f7/open}. The MIMIC-III/IV
-\emph{demonstration} subsets are real de-identified patient records, openly redistributable without credentialing
-(only the full databases need it); NSL-KDD and MIMIC are third-party and not redistributed.
+proofs in place of prefix recomputation, and evaluation on live clinical access logs in place of the synthetic
+population and the two-decade-old flow dataset used here. The prototype, the script producing every number here,
+the result files behind each table and a README mapping each table to its generating script are at
+\url{https://waliulrayhan.github.io/anchored-integrity/}. The MIMIC-III/IV
+\emph{demonstration} subsets used here are real de-identified patient records, openly redistributable without
+credentialing (only the full databases need it); NSL-KDD and MIMIC are third-party and not redistributed.
 
 \begin{thebibliography}{00}
 \scriptsize
 \setlength{\itemsep}{0pt plus 0.2pt}
 \setlength{\parsep}{0pt}
-\bibitem{tyler} D. Tyler and T. Viana, ``Trust No One? A Framework for Assisting Healthcare Organisations in Transitioning to a Zero-Trust Network Architecture,'' \emph{Appl. Sci.}, vol. 11, no. 16, art. 7499, 2021, doi: 10.3390/app11167499.
-\bibitem{sahu} S. K. Sahu, ``Healthcare Zero-Trust Resilience Architecture (HZTRA): A Practitioner-Led Reference Model for Securing Hospital Information Systems,'' \emph{Comput. Fraud Secur.}, pp. 1312--1316, 2025, doi: 10.52710/cfs.1095.
-\bibitem{haber} S. Haber and W. S. Stornetta, ``How to Time-Stamp a Digital Document,'' \emph{J. Cryptol.}, vol. 3, no. 2, pp. 99--111, 1991, doi: 10.1007/BF00196791.
-\bibitem{crosby} S. A. Crosby and D. S. Wallach, ``Efficient Data Structures for Tamper-Evident Logging,'' in \emph{Proc. 18th USENIX Security Symp.}, Montreal, QC, Aug. 2009, pp. 317--334.
+\bibitem{tyler} D. Tyler and T. Viana, ``Trust No One? A Framework for Assisting Healthcare Organisations in Transitioning to a Zero-Trust Network Architecture,'' \emph{Applied Sciences}, vol. 11, no. 16, art. 7499, 2021, doi: 10.3390/app11167499.
+\bibitem{sahu} S. K. Sahu, ``Healthcare Zero-Trust Resilience Architecture (HZTRA): A Practitioner-Led Reference Model for Securing Hospital Information Systems,'' \emph{Computer Fraud \& Security}, pp. 1312--1316, 2025, doi: 10.52710/cfs.1095.
+\bibitem{haber} S. Haber and W. S. Stornetta, ``How to Time-Stamp a Digital Document,'' \emph{Journal of Cryptology}, vol. 3, no. 2, pp. 99--111, 1991, doi: 10.1007/BF00196791.
+\bibitem{crosby} S. A. Crosby and D. S. Wallach, ``Efficient Data Structures for Tamper-Evident Logging,'' in \emph{Proc. 18th USENIX Security Symposium}, Montreal, QC, Canada, Aug. 2009, pp. 317--334.
 \bibitem{rfc6962} B. Laurie, A. Langley, and E. Kasper, ``Certificate Transparency,'' RFC 6962, IETF, June 2013, doi: 10.17487/RFC6962.
 \bibitem{rfc9162} B. Laurie, E. Messeri, and R. Stradling, ``Certificate Transparency Version 2.0,'' RFC 9162, IETF, Dec. 2021, doi: 10.17487/RFC9162.
 \bibitem{rfc3161} C. Adams, P. Cain, D. Pinkas, and R. Zuccherato, ``Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP),'' RFC 3161, IETF, Aug. 2001, doi: 10.17487/RFC3161.
 \bibitem{nist800207} S. Rose, O. Borchert, S. Mitchell, and S. Connelly, ``Zero Trust Architecture,'' NIST Special Publication 800-207, National Institute of Standards and Technology, Aug. 2020, doi: 10.6028/NIST.SP.800-207.
 \bibitem{hicp} ``Healthcare Industry Cybersecurity Practices (HICP): Technical Volume 1,'' U.S. Department of Health and Human Services, 405(d) Program, 2023.
-\bibitem{usenix23} X. Xu \emph{et al.}, ``How to Cover up Anomalous Accesses to Electronic Health Records,'' in \emph{Proc. 32nd USENIX Security Symp.}, Anaheim, CA, Aug. 2023.
-\bibitem{heliyonAudit} F. Ullah \emph{et al.}, ``Blockchain-Enabled EHR Access Auditing,'' \emph{Heliyon}, vol. 10, no. 16, art. e34407, 2024, doi: 10.1016/j.heliyon.2024.e34407.
-\bibitem{ijisPbac} F. Ullah \emph{et al.}, ``EHR management evolution through purpose-based access control and blockchain smart contracts,'' \emph{Int. J. Inf. Secur.}, vol. 24, no. 1, art. 63, 2025, doi: 10.1007/s10207-024-00967-0.
-\bibitem{pandey} R. Pandey, A. K. Sahoo, and S. K. Singh, ``Lightweight Blockchain-Based Integrity Verification for EHR Systems,'' \emph{Nat. Resour. Human Health}, vol. 6, no. 4s, pp. 748--761, 2026, doi: 10.53365/nrfhh.824.
-\bibitem{waghmode} P. Waghmode \emph{et al.}, ``Intrusion detection based on machine learning using least square support vector machine,'' \emph{Sci. Rep.}, vol. 15, no. 1, art. 12066, 2025, doi: 10.1038/s41598-025-95621-7.
-\bibitem{hbild} H. Benahmed \emph{et al.}, ``HBiLD-IDS: An Efficient Hybrid BiLSTM-DNN Model for Real-Time Intrusion Detection in IoMT Networks,'' \emph{Information}, vol. 16, no. 8, art. 669, 2025, doi: 10.3390/info16080669.
+\bibitem{usenix23} X. Xu \emph{et al.}, ``How to Cover up Anomalous Accesses to Electronic Health Records,'' in \emph{Proc. 32nd USENIX Security Symposium}, Anaheim, CA, USA, Aug. 2023.
+\bibitem{heliyonAudit} F. Ullah \emph{et al.}, ``Blockchain-Enabled EHR Access Auditing: Enhancing Healthcare Data Security,'' \emph{Heliyon}, vol. 10, no. 16, art. e34407, 2024, doi: 10.1016/j.heliyon.2024.e34407.
+\bibitem{ijisPbac} F. Ullah \emph{et al.}, ``EHR Management Evolution Through Purpose-Based Access Control and Blockchain,'' \emph{Int. J. Information Security}, vol. 24, no. 1, art. 63, 2025, doi: 10.1007/s10207-024-00967-0.
+\bibitem{pandey} R. Pandey, A. K. Sahoo, and S. K. Singh, ``Lightweight and Scalable Blockchain-Based Integrity Verification for EHR Systems,'' \emph{Natural Resources for Human Health}, vol. 6, no. 4s, pp. 748--761, 2026, doi: 10.53365/nrfhh.824.
+\bibitem{waghmode} P. Waghmode \emph{et al.}, ``Intrusion Detection System Based on Machine Learning Using Least Squares SVM,'' \emph{Scientific Reports}, vol. 15, no. 1, art. 12066, 2025, doi: 10.1038/s41598-025-95621-7.
+\bibitem{hbild} H. Benahmed \emph{et al.}, ``HBiLD-IDS: An Efficient Hybrid BiLSTM-DNN Model for Real-Time Intrusion Detection,'' \emph{Information}, vol. 16, no. 8, art. 669, 2025, doi: 10.3390/info16080669.
 \bibitem{safetymed} N. Faruqui \emph{et al.}, ``SafetyMed: A Novel IoMT Intrusion Detection System Using CNN-LSTM Hybridization,'' \emph{Electronics}, vol. 12, no. 17, art. 3541, 2023, doi: 10.3390/electronics12173541.
-\bibitem{khandre} G. Khandre and S. Bhide, ``AI-Driven Automated Incident Response in Healthcare Cybersecurity: A Systematic Review,'' \emph{Int. J. Innov. Sci. Res. Technol.}, vol. 11, no. 5, art. IJISRT26MAY1548, 2026, doi: 10.38124/ijisrt/26may1548.
+\bibitem{khandre} G. Khandre and S. Bhide, ``AI-Driven Automated Incident Response in Healthcare Cybersecurity: A Systematic Review of SOAR Frameworks, IoMT Security, and Emerging Trends,'' \emph{Int. J. Innovative Science and Research Technology}, vol. 11, no. 5, art. IJISRT26MAY1548, 2026, doi: 10.38124/ijisrt/26may1548.
 \bibitem{ornstil} C. Ornstil, ``A Role-Aware Insider Threat Detection and Response System for Electronic Health Records,'' M.S. thesis, California Polytechnic State University, 2025.
-\bibitem{adabara} I. Adabara \emph{et al.}, ``Trustworthy and Ethical Intrusion Detection for Healthcare IoMT Using Reinforcement Learning and Governance Rules,'' \emph{Sci. Rep.}, vol. 16, no. 1, art. 25847, 2026, doi: 10.1038/s41598-026-55707-2.
-\bibitem{ahmad} A. Ahmad and A. Gusain, ``A Zero Trust Framework with Built-in Forensics and Response Infrastructure Automation for Securing IoMT,'' \emph{LGU Res. J. Comput. Sci. IT}, vol. 10, no. 1, 2026.
-\bibitem{nslkdd} M. Tavallaee \emph{et al.}, ``A Detailed Analysis of the KDD CUP 99 Data Set,'' in \emph{Proc. IEEE CISDA}, 2009, pp. 1--6.
+\bibitem{adabara} I. Adabara \emph{et al.}, ``Trustworthy and Ethical Intrusion Detection for Healthcare Internet of Medical Things Using Reinforcement Learning and Governance Rules,'' \emph{Sci. Rep.}, vol. 16, no. 1, art. 25847, 2026, doi: 10.1038/s41598-026-55707-2.
+\bibitem{ahmad} A. Ahmad and A. Gusain, ``A Zero Trust Framework with Built-in Forensics and Response for IoMT,'' \emph{LGU Res. J. Comput. Sci. IT}, vol. 10, no. 1, 2026, doi: 10.54692/lgurjcsit.2025.10176.
+\bibitem{nslkdd} M. Tavallaee \emph{et al.}, ``A Detailed Analysis of the KDD CUP 99 Data Set,'' in \emph{Proc. IEEE CISDA}, 2009, pp. 1--6, doi: 10.1109/CISDA.2009.5356528.
 \end{thebibliography}
 
 \end{document}
